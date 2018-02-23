@@ -1,0 +1,61 @@
+<ion-view cache-view="false" view-title="{{'Login.view.Login' | translate}}"> 
+  <ion-content> 
+    <div class="bar bar-header bar-stable" data-container="true"> 
+    <h1 class="title">{{'Login.view.Login' | translate}}</h1> 
+  </div> 
+    <div class="list" data-container="true" style="padding-top: 60px; width: 428px; height: 180px;"> 
+      <div class="col text-center"> 
+         <img src="img/logo.png"> 
+      </div> 
+    </div> 
+    <form class="form-validation" autocomplete="off" name="form" ng-submit="login()" role="form"> 
+      <div class="list list-inset" data-container="true"> 
+        <label class="item item-input"> <i class="icon ion-person placeholder-icon"></i> <input type="text" class="form-control" ng-model="user.username" id="username" placeholder="{{'Login.view.Username' | translate}}"> </label> 
+        <label class="item item-input"> <i class="icon ion-asterisk placeholder-icon"></i> <input type="password" class="form-control" ng-model="user.password" id="password" placeholder="{{'Login.view.Password' | translate}}"> </label> 
+        <label class="item"> <button type="submit" class="button button-block button-positive" ng-disabled="form.$invalid || vm.dataLoading">{{"Login.view.Login" | translate}}</button> </label> 
+        <label class="item"> 
+          <div ng-show="message.error" class="help-block">
+             {{message.error}} 
+          </div> </label> 
+        <label class="item"> 
+          <div class="row"> 
+            <div class="col col-offset-10"> 
+              <a href="http://facebook.com" target="_self"><i class="ion-social-facebook"></i></a> 
+            </div> 
+            <div class="col col-offset-10"> 
+              <a href="http://google.com" target="_self"><i class="ion-social-googleplus"></i></a> 
+            </div> 
+            <div class="col col-offset-10"> 
+              <a href="http://facebook.com" target="_self"><i class="ion-social-github"></i></a> 
+            </div> 
+            <div class="col col-offset-10"> 
+              <a href="http://facebook.com" target="_self"><i class="ion-social-linkedin"></i></a> 
+            </div> 
+            <div class="col col-offset-10"> 
+              <a href="https://login.cronapp.io/login" target="_self"><i class="ion-android-cloud"></i></a> 
+            </div> 
+          </div> </label> 
+      </div> 
+    </form><ion-item class="item dark component-holder" xattr-theme="dark" data-replace="false" data-component="crn-list-item" id="crn-list-item-444717"><h2 xattr-position="text-center" class="text-center component-holder" data-component="crn-label" id="crn-label-143792">Não tem uma conta?</h2><button class="button component-holder button-clear button-block button-positive" type="submit" ng-click="blockly.js.blockly.ModalCadastro.Exibir()" data-component="crn-button" id="crn-button-124928" xattr-type="button-clear" xattr-fullsize="button-block" xattr-theme="button-positive"> <span>Cadastre-se</span></button></ion-item> 
+  </ion-content> 
+</ion-view>
+
+
+
+
+
+<div class="modal fade" id="modal83858">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="component-holder modal-header col-xs-1" style="width: 410px; height: 87px;">
+       
+      <h2 xattr-position="text-left" class="component-holder text-left col-xs-1" data-component="crn-label" id="crn-label-828285" style="width: 197px; height: 36px;">Cadastre-se</h2><button class="button component-holder button-clear button-positive col-xs-1" type="submit" ng-click="blockly.js.blockly.ModalCadastro.Esconder()" data-component="crn-button" id="crn-button-923807" style="width: 123px; height: 35px;" xattr-type="button-clear" xattr-theme="button-positive"><i class="ion ion-android-arrow-back"></i> <span>Voltar</span></button></div>
+      <div class="modal-body col-xs-12">
+       
+     <label class="item item-input component-holder col-xs-12" data-component="crn-input" id="crn-input-394901"><input id="textinput-id" type="text" placeholder="Email" ng-model="vars.email"></label><label class="item item-input component-holder col-xs-12" data-component="crn-input" id="crn-input-394901"><input id="textinput-id" type="text" placeholder="Login" ng-model="vars.login"></label><label class="item item-input component-holder col-xs-12" data-component="crn-input" id="crn-input-394901"><input id="textinput-id" type="password" placeholder="Senha" ng-model="vars.senha"></label><label class="item item-input component-holder col-xs-12" data-component="crn-input" id="crn-input-394901"><input id="textinput-id" type="password" placeholder="Por favor, digite a senha novamente." ng-model="vars.senhaConfere"></label></div>
+     <div class="modal-footer col-xs-12">
+       
+     <button class="button component-holder col-xs-12 button-positive" type="submit" ng-click="cronapi.util.makeCallServerBlocklyAsync('blockly.CadastroUsuario:InserirDados', null, null)" data-component="crn-button" id="crn-button-903070" xattr-theme="button-positive"><i class="ion ion-android-done"></i> <span>Confirmar</span></button></div>
+   </div>
+ </div>
+</div>

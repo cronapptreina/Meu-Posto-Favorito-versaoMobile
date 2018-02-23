@@ -1,0 +1,59 @@
+<ion-view cache-view="false" view-title="User" hide-back-button="true">
+  <ion-nav-buttons side="right">
+    
+    <button class="button button-stable" ng-show="User.inserting || User.editing" ng-click="User.post()"> <i class="icon ion-checkmark"></i> </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-hide="User.inserting || User.editing" menu-toggle="left"> </button>
+    <button class="button button-stable" ng-show="User.inserting || User.editing" ng-click="User.cancel()"> <i class="icon ion-android-arrow-back"></i> </button>
+  </ion-nav-buttons>
+  <ion-content>
+       
+    <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-906854">
+      <datasource name="User" entity="api/cronapi/query/trzmtjjtacf8/" keys="id" rows-per-page="10" delete-message="Deseja remover?" class=""></datasource>
+    </div>
+    <div crn-datasource="User" class="" ng-hide="User.editing || User.inserting">
+      <ion-list can-swipe="listCanSwipe">
+        <ion-item ng-repeat="rowData in datasource.data" class="item" ng-click="">
+          
+          <ion-option-button class="button-positive" ng-click="datasource.startEditing(rowData)">
+            
+          </ion-option-button>
+          <ion-option-button class="button-assertive" ng-click="datasource.remove(rowData)">
+            &nbsp;
+            
+          </ion-option-button>
+        <img src="{{rowData.picture}}" class="component-holder" style="display:block; width: 100px; height:100px;" xattr-position="" data-component="crn-image" id="crn-image-352719"><div data-replace="true" data-component="crn-container" class="component-holder" id="crn-container-404730">&nbsp;</div><button class="button component-holder button-positive" type="submit" ng-click="datasource.startEditing(rowData)" data-component="crn-button" id="crn-button-366930" xattr-type="" xattr-theme="button-positive"><i class="ion ion-edit"></i> </button><ion-item class="item dark component-holder" xattr-theme="dark" data-replace="false" data-component="crn-list-item" id="crn-list-item-707788"><h2 xattr-position="text-left" class="component-holder text-left" data-component="crn-label" id="crn-label-149021">{{rowData.email}}</h2></ion-item><ion-item class="item dark component-holder" xattr-theme="dark" data-replace="false" data-component="crn-list-item" id="crn-list-item-707788"><h2 xattr-position="text-left" class="component-holder text-left" data-component="crn-label" id="crn-label-149021">{{rowData.name}}</h2></ion-item><ion-item class="item dark component-holder" xattr-theme="dark" data-replace="false" data-component="crn-list-item" id="crn-list-item-707788"><h2 xattr-position="text-left" class="component-holder text-left" data-component="crn-label" id="crn-label-149021">{{rowData.login}}</h2></ion-item></ion-item>
+      </ion-list>
+    </div>
+    <div ng-show="User.editing || User.inserting">
+      <form crn-datasource="User">
+        <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting">
+          <div class="list">
+            <!-- email begin -->
+            <label for="textinput-email" class="item item-input item-stacked-label">
+            <span class="input-label">Email</span>
+            <input type="text" placeholder="Email" ng-model="User.active.email" id="textinput-email" name="textinput-email">
+            </label>
+            <!-- name begin -->
+            <label for="textinput-name" class="item item-input item-stacked-label">
+            <span class="input-label">Nome</span>
+            <input type="text" placeholder="Nome" ng-model="User.active.name" id="textinput-name" name="textinput-name" required="required">
+            </label>
+            <!-- login begin -->
+            <label for="textinput-login" class="item item-input item-stacked-label">
+            <span class="input-label">Login</span>
+            <input type="text" placeholder="Login" ng-model="User.active.login" id="textinput-login" name="textinput-login" required="required">
+            </label><a class="item item-thumbnail-left component-holder" data-component="crn-list-item-thumbnail" id="crn-list-item-thumbnail-828122"><img src="{{User.active.picture}}" class="component-holder" xattr-position="" data-component="crn-image" id="imagem" ng-model="User.active.picture" cronapp-security="visible : None"><button class="button component-holder button-block button-clear button-positive" type="submit" ng-click="blockly.js.blockly.Foto.Tirar()" data-component="crn-button" id="crn-button-130946" xattr-fullsize="button-block" xattr-type="button-clear" xattr-theme="button-positive"><i class="ion ion-camera"></i> <span>Tirar Foto</span></button><button class="button component-holder button-block button-clear button-positive" type="submit" ng-click="blockly.js.blockly.Foto.Enviar()" data-component="crn-button" id="crn-button-130946" xattr-fullsize="button-block" xattr-type="button-clear" xattr-theme="button-positive"><i class="ion ion-android-upload"></i> <span>Enviar Foto</span></button></a>
+            <!-- picture begin -->
+            
+            <!-- password begin -->
+            
+            <!-- theme begin -->
+            
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

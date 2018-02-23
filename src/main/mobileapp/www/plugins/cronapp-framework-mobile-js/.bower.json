@@ -1,0 +1,45 @@
+{
+  "name": "cronapp-framework-mobile-js",
+  "version": "0.0.52",
+  "homepage": "https://github.com/technecloud/cronapp-framework-mobile-js",
+  "authors": [
+    "Tarso Matos Araujo <tarso.matos@gmail.com>"
+  ],
+  "description": "Javascript library for CronApp's projects",
+  "main": "cronapp.framework.mobile.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.9",
+    "angular-cookies": "1.5.8",
+    "angular-dynamic-locale": "0.1.32",
+    "angular-i18n": "1.4.5",
+    "angular-resource": "1.3.15",
+    "angular-sanitize": "1.3.15",
+    "angular-translate": "2.11.1",
+    "angular-translate-handler-log": "2.11.1",
+    "angular-translate-loader-static-files": "2.11.1",
+    "angular-translate-storage-local": "2.11.1",
+    "angular-ui-notification": "0.0.14",
+    "angular-ui-router": "0.2.15",
+    "jquery": "2.1.4",
+    "font-awesome": "4.4.0",
+    "cronapi-js": "latest",
+    "chart.js": "2.x"
+  },
+  "_release": "0.0.52",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.52",
+    "commit": "9079718c51bd7f2d701fc41ccf2e07e35e4d5091"
+  },
+  "_source": "https://github.com/technecloud/cronapp-framework-mobile-js.git",
+  "_target": "0.0.52",
+  "_originalSource": "cronapp-framework-mobile-js"
+}

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?><blockly formTarget="src/main/mobileapp/www/views/logged/posto.view.html" resourceType="JAVA" ruleDescription="Localizacao" ruleName="Localizacao" ruleSynchronous="false" ruleTimeout="300" ruleType="I">
+  <metadata scale="1" scrollx="358.00000000000045" scrolly="-195" target="Anb:u5+^,0vLkL9QIqn5"/>
+  <block colour="#995ba5" id="Aac6h,%S#RMK(aXJDbiP" origintype="procedures_defnoreturn" output="false" tooltip="Cria uma função que não tem retorno." type="procedures_defnoreturn" x="-232" y="-97">
+    <mutation>
+      <arg name="endereco"/>
+    </mutation>
+    <field name="NAME">setar_endereco</field>
+    <comment h="80" pinned="false" w="160">Descreva esta função...</comment>
+    <statement name="STACK">
+      <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="Jh)DjnHCGl%V)mPf/fGC" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+        <field name="VAR">listaEndereco</field>
+        <value name="VALUE">
+          <block colour="#745ba5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="0|o#)@.d6rNIeqUb$FCZ" origintype="lists_split" output="true" tooltip="function () {&#10;      var mode = thisBlock.getFieldValue('MODE');&#10;      if(mode == 'SPLIT') {&#10;        return Blockly.Msg.LISTS_SPLIT_TOOLTIP_SPLIT;&#10;      }&#10;      else if(mode == 'JOIN') {&#10;        return Blockly.Msg.LISTS_SPLIT_TOOLTIP_JOIN;&#10;      }&#10;      throw 'Unknown mode: ' + mode;&#10;    }" type="lists_split">
+            <mutation mode="SPLIT"/>
+            <field name="MODE">SPLIT</field>
+            <value name="INPUT">
+              <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="/F-Q~s@Nvz,y36kwaX#)" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                <field name="VAR">endereco</field>
+              </block>
+            </value>
+            <value name="DELIM">
+              <shadow colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="shFURxg[^XYo;m/@zivQ" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                <field name="TEXT">,</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block colour="#5ba58c" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="=Z@bw)Ww-2$Mx{Af1|NH" origintype="text_print" output="false" tooltip="Imprime o texto, número ou valor especificado." type="text_print">
+            <value name="TEXT">
+              <shadow colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="nCaVC#9@ki(!tV~}yIkC" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="m(6ZSS6I%Af-mO]JoTCG" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                <field name="VAR">listaEndereco</field>
+              </block>
+            </value>
+            <next>
+              <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="~5vTAT[B5y?D!aA+[`3]" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+                <field name="VAR">logradouro</field>
+                <value name="VALUE">
+                  <block colour="#745ba5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="1A+Avb:7;;kW/P~qK43*" origintype="lists_getIndex" output="true" tooltip="function () {&#10;      var mode = thisBlock.getFieldValue('MODE');&#10;      var where = thisBlock.getFieldValue('WHERE');&#10;      var tooltip = '';&#10;      switch(mode + ' ' + where) {&#10;      case 'GET FROM_START':&#10;      case 'GET FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM;&#10;        break;&#10;      case 'GET FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FIRST;&#10;        break;&#10;      case 'GET LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_LAST;&#10;        break;&#10;      case 'GET RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM;&#10;        break;&#10;      case 'GET_REMOVE FROM_START':&#10;      case 'GET_REMOVE FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM;&#10;        break;&#10;      case 'GET_REMOVE FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST;&#10;        break;&#10;      case 'GET_REMOVE LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST;&#10;        break;&#10;      case 'GET_REMOVE RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM;&#10;        break;&#10;      case 'REMOVE FROM_START':&#10;      case 'REMOVE FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM;&#10;        break;&#10;      case 'REMOVE FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST;&#10;        break;&#10;      case 'REMOVE LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST;&#10;        break;&#10;      case 'REMOVE RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM;&#10;        break;&#10;      }&#10;      if(where == 'FROM_START' || where == 'FROM_END') {&#10;        var msg = (where == 'FROM_START') ? Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP : Blockly.Msg.LISTS_INDEX_FROM_END_TOOLTIP;&#10;        tooltip += '  ' + msg.replace('%1', thisBlock.workspace.options.oneBasedIndex ? '#1' : '#0');&#10;      }&#10;      return tooltip;&#10;    }" type="lists_getIndex">
+                    <mutation at="true" statement="false"/>
+                    <field name="MODE">GET</field>
+                    <field name="WHERE">FROM_START</field>
+                    <value name="VALUE">
+                      <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="=D0]}2O34A=0Gt!c)2E[" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                        <field name="VAR">listaEndereco</field>
+                      </block>
+                    </value>
+                    <value name="AT">
+                      <block colour="#5b67a5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="Jn@9iZ=X4qNu0|^,@KBO" origintype="math_number" output="true" tooltip="function () { [native code] }" type="math_number">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="rmD(j}]%)HibYs`qN7sh" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+                    <field name="VAR">bairro</field>
+                    <value name="VALUE">
+                      <block colour="#745ba5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="o%BPe%Rk%2(ud_Ih2%6r" origintype="lists_getIndex" output="true" tooltip="function () {&#10;      var mode = thisBlock.getFieldValue('MODE');&#10;      var where = thisBlock.getFieldValue('WHERE');&#10;      var tooltip = '';&#10;      switch(mode + ' ' + where) {&#10;      case 'GET FROM_START':&#10;      case 'GET FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM;&#10;        break;&#10;      case 'GET FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FIRST;&#10;        break;&#10;      case 'GET LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_LAST;&#10;        break;&#10;      case 'GET RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM;&#10;        break;&#10;      case 'GET_REMOVE FROM_START':&#10;      case 'GET_REMOVE FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM;&#10;        break;&#10;      case 'GET_REMOVE FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST;&#10;        break;&#10;      case 'GET_REMOVE LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST;&#10;        break;&#10;      case 'GET_REMOVE RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM;&#10;        break;&#10;      case 'REMOVE FROM_START':&#10;      case 'REMOVE FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM;&#10;        break;&#10;      case 'REMOVE FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST;&#10;        break;&#10;      case 'REMOVE LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST;&#10;        break;&#10;      case 'REMOVE RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM;&#10;        break;&#10;      }&#10;      if(where == 'FROM_START' || where == 'FROM_END') {&#10;        var msg = (where == 'FROM_START') ? Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP : Blockly.Msg.LISTS_INDEX_FROM_END_TOOLTIP;&#10;        tooltip += '  ' + msg.replace('%1', thisBlock.workspace.options.oneBasedIndex ? '#1' : '#0');&#10;      }&#10;      return tooltip;&#10;    }" type="lists_getIndex">
+                        <mutation at="true" statement="false"/>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE">
+                          <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="(^kZ_fNa@%AQidq`y-97" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                            <field name="VAR">listaEndereco</field>
+                          </block>
+                        </value>
+                        <value name="AT">
+                          <block colour="#5b67a5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="wpw/QVw{zZo,u}3+{z@D" origintype="math_number" output="true" tooltip="function () { [native code] }" type="math_number">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="2(T0K3ce.q)Rea^k!)b." origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+                        <field name="VAR">cidade</field>
+                        <value name="VALUE">
+                          <block colour="#745ba5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="H]wwJpfGdV%5|0@.Ig{l" origintype="lists_getIndex" output="true" tooltip="function () {&#10;      var mode = thisBlock.getFieldValue('MODE');&#10;      var where = thisBlock.getFieldValue('WHERE');&#10;      var tooltip = '';&#10;      switch(mode + ' ' + where) {&#10;      case 'GET FROM_START':&#10;      case 'GET FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM;&#10;        break;&#10;      case 'GET FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FIRST;&#10;        break;&#10;      case 'GET LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_LAST;&#10;        break;&#10;      case 'GET RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM;&#10;        break;&#10;      case 'GET_REMOVE FROM_START':&#10;      case 'GET_REMOVE FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM;&#10;        break;&#10;      case 'GET_REMOVE FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST;&#10;        break;&#10;      case 'GET_REMOVE LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST;&#10;        break;&#10;      case 'GET_REMOVE RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM;&#10;        break;&#10;      case 'REMOVE FROM_START':&#10;      case 'REMOVE FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM;&#10;        break;&#10;      case 'REMOVE FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST;&#10;        break;&#10;      case 'REMOVE LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST;&#10;        break;&#10;      case 'REMOVE RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM;&#10;        break;&#10;      }&#10;      if(where == 'FROM_START' || where == 'FROM_END') {&#10;        var msg = (where == 'FROM_START') ? Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP : Blockly.Msg.LISTS_INDEX_FROM_END_TOOLTIP;&#10;        tooltip += '  ' + msg.replace('%1', thisBlock.workspace.options.oneBasedIndex ? '#1' : '#0');&#10;      }&#10;      return tooltip;&#10;    }" type="lists_getIndex">
+                            <mutation at="true" statement="false"/>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="]1ci{YXYcB_7D-y*UbVE" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                                <field name="VAR">listaEndereco</field>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block colour="#5b67a5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="v]2~4gi?Q;Yn2(m))/D~" origintype="math_number" output="true" tooltip="function () { [native code] }" type="math_number">
+                                <field name="NUM">3</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="v`8wRyjcMgu7q|mKY*`f" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+                            <field name="VAR">país</field>
+                            <value name="VALUE">
+                              <block colour="#745ba5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="6B#S@Fjm0wx7gKMOkHJ7" origintype="lists_getIndex" output="true" tooltip="function () {&#10;      var mode = thisBlock.getFieldValue('MODE');&#10;      var where = thisBlock.getFieldValue('WHERE');&#10;      var tooltip = '';&#10;      switch(mode + ' ' + where) {&#10;      case 'GET FROM_START':&#10;      case 'GET FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM;&#10;        break;&#10;      case 'GET FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FIRST;&#10;        break;&#10;      case 'GET LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_LAST;&#10;        break;&#10;      case 'GET RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM;&#10;        break;&#10;      case 'GET_REMOVE FROM_START':&#10;      case 'GET_REMOVE FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM;&#10;        break;&#10;      case 'GET_REMOVE FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST;&#10;        break;&#10;      case 'GET_REMOVE LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST;&#10;        break;&#10;      case 'GET_REMOVE RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM;&#10;        break;&#10;      case 'REMOVE FROM_START':&#10;      case 'REMOVE FROM_END':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM;&#10;        break;&#10;      case 'REMOVE FIRST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST;&#10;        break;&#10;      case 'REMOVE LAST':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST;&#10;        break;&#10;      case 'REMOVE RANDOM':&#10;        tooltip = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM;&#10;        break;&#10;      }&#10;      if(where == 'FROM_START' || where == 'FROM_END') {&#10;        var msg = (where == 'FROM_START') ? Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP : Blockly.Msg.LISTS_INDEX_FROM_END_TOOLTIP;&#10;        tooltip += '  ' + msg.replace('%1', thisBlock.workspace.options.oneBasedIndex ? '#1' : '#0');&#10;      }&#10;      return tooltip;&#10;    }" type="lists_getIndex">
+                                <mutation at="true" statement="false"/>
+                                <field name="MODE">GET</field>
+                                <field name="WHERE">FROM_START</field>
+                                <value name="VALUE">
+                                  <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="Yrc4[LorOm{TYnW0N[g9" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                                    <field name="VAR">listaEndereco</field>
+                                  </block>
+                                </value>
+                                <value name="AT">
+                                  <block colour="#5b67a5" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="dUH#pnvU78YG+/g5dWrd" origintype="math_number" output="true" tooltip="function () { [native code] }" type="math_number">
+                                    <field name="NUM">4</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="BPPD]~]fR?*Z$rRRRW8o" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+                                <field name="VAR">link</field>
+                                <value name="VALUE">
+                                  <block colour="#5ba58c" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="X/eq@G/F$([[+KBrWt]+" origintype="text_join" output="true" tooltip="Criar um pedaço de texto juntando qualquer número de itens." type="text_join">
+                                    <mutation items="10"/>
+                                    <value name="ADD0">
+                                      <block colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="^IrOB;u,D|NN0fr|/7BS" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                                        <field name="TEXT">https://www.google.com/maps/embed/v1/place?key=</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="{P@vBEo;3Y6pCqbmL^SX" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                                        <field name="TEXT">AIzaSyA5hw_jAdeX9pvtWlXM6wm_hyUaDHD131M</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD2">
+                                      <block colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="jR9H(|@BGQ]moeVs6BRC" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                                        <field name="TEXT">&amp;q=</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD3">
+                                      <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="B*I_j[5`n;4Kj-H}6Zx7" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                                        <field name="VAR">logradouro</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD4">
+                                      <block colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="0ztpKnmGv@[kW)K`?K?X" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                                        <field name="TEXT">+</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD5">
+                                      <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="vetfQ(_5FR0x!3KVw:Zd" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                                        <field name="VAR">bairro</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD6">
+                                      <block colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="@bAK%ZSm[T0,_buUmP{:" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                                        <field name="TEXT">+</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD7">
+                                      <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="Lenc5-cg)$jU1CaU,+,u" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                                        <field name="VAR">cidade</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD8">
+                                      <block colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="+8xvPMii6G7;Wv}|nv/1" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                                        <field name="TEXT">+</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD9">
+                                      <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="G@g.g)#}_vsG|CiB,1V%" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                                        <field name="VAR">país</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block colour="#934848" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="dcw$ZP,*UXTpwqLx`p,n" multilayer="true" namespace="cronapi.screen.changeAttrValue" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EDefinir%20valor%20do%20atributo%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20define%20o%20valor%20do%20atributo%20de%20um%20elemento%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Obter%20identificador%20:%20Objeto%3C/span%3E%3Cdiv%3E%20Identificador%20(id)%20a%20ser%20obtido%20do%20Formul%C3%A1rio%20selecionado%3C/div%3E%3Cspan%3E%20-%20Nome%20do%20atributo%20:%20Texto%3C/span%3E%3Cdiv%3E%20Nome%20do%20atributo%20contido%20no%20Identificador.%20Exemplo:%20%20src='teste'%20retorna%20src%3C/div%3E%3Cspan%3E%20-%20Valor%20do%20atributo%20:%20Texto%3C/span%3E%3Cdiv%3E%20Valor%20do%20atributo%20contido%20no%20Identificador.%20Exemplo:%20%20src='teste'%20retorna%20teste%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.screen.changeAttrValue%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.screen.changeAttrValue%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn">
+                                    <mutation name="{{cronapi.screen.changeAttrValue}}">
+                                      <arg cronapi-type="ObjectType.OBJECT" name="Obter identificador"/>
+                                      <arg cronapi-type="ObjectType.STRING" name="Nome do atributo"/>
+                                      <arg cronapi-type="ObjectType.STRING" name="Valor do atributo"/>
+                                    </mutation>
+                                    <value name="ARG0">
+                                      <block colour="#934848" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="XoE;$D]Cpp%)G95zx:-i" origintype="ids_from_screen" output="true" type="ids_from_screen">
+                                        <field name="SELECT">mapa</field>
+                                      </block>
+                                    </value>
+                                    <value name="ARG1">
+                                      <shadow colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id=")cEc11QzeV5I|Nbc1;3-" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                                        <field name="TEXT">src</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="ARG2">
+                                      <shadow colour="#5ba593" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="nAkIAAHc#?=8$ceg#9lS" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                                        <field name="TEXT"/>
+                                      </shadow>
+                                      <block colour="#a55b80" dependencyby="Aac6h,%S#RMK(aXJDbiP" id="1bI5q,!#j8vG$Wb0!WbX" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                                        <field name="VAR">link</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block colour="#995ba5" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" x="-259" y="79">
+    <mutation>
+      <arg name="coordenadas"/>
+    </mutation>
+    <field name="NAME">obter_endereco</field>
+    <comment h="80" pinned="false" w="160">Localizacao</comment>
+    <statement name="STACK">
+      <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="5,l$B~?4,XtkJaYbY/C$" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+        <field name="VAR">url</field>
+        <value name="VALUE">
+          <block colour="#5ba58c" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="Mbb%+%or4[BD1*;$B$(B" origintype="text_join" output="true" tooltip="Criar um pedaço de texto juntando qualquer número de itens." type="text_join">
+            <mutation items="3"/>
+            <value name="ADD0">
+              <block colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="lQz.gss@HziB:)[=C2tz" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                <field name="TEXT">https://maps.googleapis.com/maps/api/geocode/json?</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="YivY$Z~k2?v|{#:/mW;+" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                <field name="VAR">coordenadas</field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="~:0]i,]n.}t001]yWp.[" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                <field name="TEXT">&amp;location_type=ROOFTOP&amp;result_type=street_address&amp;key=AIzaSyA5hw_jAdeX9pvtWlXM6wm_hyUaDHD131M</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="^s01nELxy8]yw86ZSm$E" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+            <field name="VAR">consultaEndereco</field>
+            <value name="VALUE">
+              <block colour="#4f7ba8" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="xF]foxV#M#.!^f`9!4:8" multilayer="false" namespace="cronapi.json.Operations.toJson" origintype="procedures_callreturn" output="true" returntype="ObjectType.JSON" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EPara%20Json%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20para%20converter%20Texto%20ou%20Arquivo%20para%20Json%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Valor%20a%20ser%20lido%20:%20Objeto%3C/span%3E%3Cdiv%3E%20Texto%20ou%20Arquivo%20(Retorno%20da%20fun%C3%A7%C3%A3o%20%22Abrir%20arquivo%20para%20leitura%22)%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22return%22%3E%3Cstrong%3ERetorno:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Json%3C/span%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.json.Operations.toJson%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.json.Operations.toJson%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callreturn">
+                <mutation name="{{cronapi.json.Operations.toJson}}">
+                  <arg cronapi-type="ObjectType.OBJECT" name="Valor a ser lido"/>
+                </mutation>
+                <value name="ARG0">
+                  <block colour="#487f7f" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="TiR9Z29Fj#Y.m,eZWVGd" multilayer="false" namespace="cronapi.util.Operations.getURLFromOthers" origintype="procedures_callreturn" output="true" returntype="ObjectType.STRING" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EObter%20conte%C3%BAdo%20da%20URL%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20realiza%20uma%20requisi%C3%A7%C3%A3o%20%C3%A0%20uma%20URL%20e%20obt%C3%A9m%20o%20conte%C3%BAdo%20de%20resposta%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20M%C3%A9todo%20da%20requisi%C3%A7%C3%A3o%20:%20Texto%3C/span%3E%3Cbr%3E%3Cspan%3E%20-%20Tipo%20de%20conte%C3%BAdo%20:%20Texto%3C/span%3E%3Cbr%3E%3Cspan%3E%20-%20Endere%C3%A7o%20URL%20:%20Texto%3C/span%3E%3Cdiv%3E%20Endere%C3%A7o%20completo%20do%20arquivo.%20Exemplo:%20https://www.cronapp.io%3C/div%3E%3Cspan%3E%20-%20Param%C3%AAtros%20:%20Mapa%3C/span%3E%3Cdiv%3E%20Param%C3%AAtros%20a%20serem%20passados,%20para%20URL_ENCODED%20passar%20um%20mapa,%20para%20JSON,%20passar%20JSON%3C/div%3E%3Cspan%3E%20-%20Cabe%C3%A7alho%20de%20requisi%C3%A7%C3%A3o%20:%20Mapa%3C/span%3E%3Cdiv%3E%20Mapa%20com%20cabe%C3%A7alho%20de%20requisi%C3%A7%C3%A3o%20a%20ser%20adicionado%20na%20requisi%C3%A7%C3%A3o.%20Exemplo:%20Token.%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22return%22%3E%3Cstrong%3ERetorno:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Texto%3C/span%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.util.Operations.getURLFromOthers%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.util.Operations.getURLFromOthers%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callreturn">
+                    <mutation name="{{cronapi.util.Operations.getURLFromOthers}}">
+                      <arg cronapi-type="ObjectType.STRING" name="Método da requisição"/>
+                      <arg cronapi-type="ObjectType.STRING" name="Tipo de conteúdo"/>
+                      <arg cronapi-type="ObjectType.STRING" name="Endereço URL"/>
+                      <arg cronapi-type="ObjectType.MAP" name="Paramêtros"/>
+                      <arg cronapi-type="ObjectType.MAP" name="Cabeçalho de requisição"/>
+                    </mutation>
+                    <value name="ARG0">
+                      <block colour="#487f7f" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="]#NAbMB;VznmfnxO2p.*" origintype="util_dropdown" output="true" type="util_dropdown">
+                        <mutation>
+                          <arg name="GET" value="GET"/>
+                          <arg name="POST" value="POST"/>
+                          <arg name="PUT" value="PUT"/>
+                          <arg name="DELETE" value="DELETE"/>
+                        </mutation>
+                        <field name="SELECT">GET</field>
+                      </block>
+                    </value>
+                    <value name="ARG1">
+                      <block colour="#487f7f" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="hWBlH=s#WRYK@EZFJ^JU" origintype="util_dropdown" output="true" type="util_dropdown">
+                        <mutation>
+                          <arg name="application/x-www-form-urlencoded" value="x_www_form_urlencoded"/>
+                          <arg name="application/json" value="JSON"/>
+                        </mutation>
+                        <field name="SELECT">application/json</field>
+                      </block>
+                    </value>
+                    <value name="ARG2">
+                      <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="vmlD%#oAj@4^k(WKHghK" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                        <field name="TEXT"/>
+                      </shadow>
+                      <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="J5*bv9K}gW#oqq|2O}T+" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                        <field name="VAR">url</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="?QRpP}qsicmw.Y8j[$W0" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+                <field name="VAR">Results</field>
+                <value name="VALUE">
+                  <block colour="#4f7ba8" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="m]BJ1dsbiIg[KOCI9hN@" multilayer="false" namespace="cronapi.json.Operations.getJsonOrMapField" origintype="procedures_callreturn" output="true" returntype="ObjectType.OBJECT" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EObter%20campo%20do%20Json%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20para%20obter%20campo%20do%20Json%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Json%20:%20Objeto%3C/span%3E%3Cbr%3E%3Cspan%3E%20-%20Caminho%20a%20percorrer%20:%20Texto%3C/span%3E%3Cdiv%3E%20Exemplo:%20estado%5B3%5D.uf%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22return%22%3E%3Cstrong%3ERetorno:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Objeto%3C/span%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.json.Operations.getJsonOrMapField%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.json.Operations.getJsonOrMapField%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callreturn">
+                    <mutation name="{{cronapi.json.Operations.getJsonOrMapField}}">
+                      <arg cronapi-type="ObjectType.OBJECT" name="Json"/>
+                      <arg cronapi-type="ObjectType.STRING" name="Caminho a percorrer"/>
+                    </mutation>
+                    <value name="ARG0">
+                      <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="uqxbeRU9[Gke4ku;VJCV" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                        <field name="VAR">consultaEndereco</field>
+                      </block>
+                    </value>
+                    <value name="ARG1">
+                      <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="si$9pH8q8{24`4=o_S2p" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                        <field name="TEXT">results[0]</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="X5^AB%7[4cH;qQ%d82n|" origintype="variables_set" output="false" tooltip="Define esta variável para o valor da entrada." type="variables_set">
+                    <field name="VAR">endereco</field>
+                    <value name="VALUE">
+                      <block colour="#4f7ba8" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="zPDT^)ztSEpSZRJlV+TG" multilayer="false" namespace="cronapi.json.Operations.getJsonOrMapField" origintype="procedures_callreturn" output="true" returntype="ObjectType.OBJECT" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EObter%20campo%20do%20Json%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20para%20obter%20campo%20do%20Json%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Json%20:%20Objeto%3C/span%3E%3Cbr%3E%3Cspan%3E%20-%20Caminho%20a%20percorrer%20:%20Texto%3C/span%3E%3Cdiv%3E%20Exemplo:%20estado%5B3%5D.uf%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22return%22%3E%3Cstrong%3ERetorno:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Objeto%3C/span%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.json.Operations.getJsonOrMapField%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.json.Operations.getJsonOrMapField%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callreturn">
+                        <mutation name="{{cronapi.json.Operations.getJsonOrMapField}}">
+                          <arg cronapi-type="ObjectType.OBJECT" name="Json"/>
+                          <arg cronapi-type="ObjectType.STRING" name="Caminho a percorrer"/>
+                        </mutation>
+                        <value name="ARG0">
+                          <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="7Mi/hLwqc9yfXGRlH675" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                            <field name="VAR">Results</field>
+                          </block>
+                        </value>
+                        <value name="ARG1">
+                          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="D]4Y9OA$s?=!tztBb,)W" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                            <field name="TEXT">formatted_address</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block colour="#934848" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="YouN(h4G[77kM[w?5](n" multilayer="true" namespace="cronapi.screen.changeValueOfField" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EAlterar%20valor%20do%20campo%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20para%20alterar%20valor%20do%20campo%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Campo%20:%20Texto%3C/span%3E%3Cbr%3E%3Cspan%3E%20-%20Valor%20:%20Texto%3C/span%3E%3Cbr%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.screen.changeValueOfField%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.screen.changeValueOfField%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn">
+                        <mutation name="{{cronapi.screen.changeValueOfField}}">
+                          <arg cronapi-type="ObjectType.STRING" name="Campo"/>
+                          <arg cronapi-type="ObjectType.STRING" name="Valor"/>
+                        </mutation>
+                        <value name="ARG0">
+                          <block colour="#934848" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="9wX|sixnh2G}*Cxp(+((" origintype="form_fieldscreen_callreturn" output="true" type="form_fieldscreen_callreturn">
+                            <field name="SELECT">Posto.active.endereco</field>
+                          </block>
+                        </value>
+                        <value name="ARG1">
+                          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="b:[((NLkQ(gSfr]S6)I;" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+                            <field name="TEXT"/>
+                          </shadow>
+                          <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="PmA~*^RC!oG[s/a2-HI_" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                            <field name="VAR">endereco</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block colour="#995ba5" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="36cVF2:|WhNR8_9q}%KK" origintype="procedures_callnoreturn" output="false" tooltip="Executa a função definida pelo usuário &quot;setar_endereco&quot;." type="procedures_callnoreturn">
+                            <mutation name="setar_endereco">
+                              <arg cronapi-type="undefined" name="endereco"/>
+                            </mutation>
+                            <value name="ARG0">
+                              <block colour="#a55b80" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="VA4lY*G[USH`M(LT*xa3" origintype="variables_get" output="true" tooltip="Retorna o valor desta variável." type="variables_get">
+                                <field name="VAR">endereco</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</blockly>
