@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><blockly formTarget="" resourceType="JS" ruleDescription="Firebase" ruleName="Firebase" ruleSynchronous="false" ruleTimeout="" ruleType="I">
+  <metadata scale="1" scrollx="357.0000000000001" scrolly="8.526512829121202e-14" target="Anb:u5+^,0vLkL9QIqn5"/>
+  <block colour="#995ba5" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" x="-262" y="-7">
+    <field name="NAME">configurar</field>
+    <comment h="80" pinned="false" w="160">Firebase</comment>
+    <statement name="STACK">
+      <block colour="#465627" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="%T-uDVm*zpq@0LL+uc4h" multilayer="false" namespace="cronapi.firebase.configFirebase" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EConfigurar%20firebase%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20configura%20a%20inst%C3%A2ncia%20de%20projeto%20do%20firebase.%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Chave%20da%20API%20:%20Texto%3C/span%3E%3Cdiv%3E%20Chave%20de%20acesso%20da%20API.%20Exemplo:%20'AIzaS...FTZ8'%3C/div%3E%3Cspan%3E%20-%20Dom%C3%ADnio%20de%20autentica%C3%A7%C3%A3o%20:%20Texto%3C/span%3E%3Cdiv%3E%20Dom%C3%ADnio%20de%20autentica%C3%A7%C3%A3o%20do%20firebase.%20Exemplo:%20'my-project-11.firebaseapp.com'%3C/div%3E%3Cspan%3E%20-%20URL%20do%20banco%20:%20Texto%3C/span%3E%3Cdiv%3E%20URL%20do%20banco%20do%20firebase.%20Exemplo:%20'my-project-11.firebaseapp.com'%3C/div%3E%3Cspan%3E%20-%20Id%20do%20projeto%20:%20Texto%3C/span%3E%3Cdiv%3E%20Id%20do%20projeto%20do%20firebase.%20Exemplo:%20'my-project-11'%3C/div%3E%3Cspan%3E%20-%20Container%20de%20armazenamento%20:%20Texto%3C/span%3E%3Cdiv%3E%20Container%20de%20armazenamento%20(storageBucket)%20do%20firebase.%20Exemplo:%20'my-project-11.appspot.com'%3C/div%3E%3Cspan%3E%20-%20Id%20de%20envio%20das%20mensagens%20:%20Texto%3C/span%3E%3Cdiv%3E%20Id%20de%20envio%20das%20mensagens%20(messagingSenderId)%20do%20firebase.%20Exemplo:'123456789012'%3C/div%3E%3Cspan%3E%20-%20Provedor%20de%20autentica%C3%A7%C3%A3o%20:%20Texto%3C/span%3E%3Cdiv%3E%20Provedor%20de%20autentica%C3%A7%C3%A3o%20do%20firebase,%20caso%20p%C3%BAblico,%20deixar%20vazio.%3C/div%3E%3Cspan%3E%20-%20Identificador%20(uid)%20:%20Texto%3C/span%3E%3Cdiv%3E%20Identificador%20%C3%BAnico%20(uid)%20do%20firebase.%20Exemplo:'ab123s-def2-2131-123d-92dk2l93k2k'%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.firebase.configFirebase%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.firebase.configFirebase%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn">
+        <mutation name="{{cronapi.firebase.configFirebase}}" return-raw-type="undefined">
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="Chave da API"/>
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="Domínio de autenticação"/>
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="URL do banco"/>
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="Id do projeto"/>
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="Container de armazenamento"/>
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="Id de envio das mensagens"/>
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="Provedor de autenticação"/>
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="Identificador (uid)"/>
+        </mutation>
+        <value name="ARG0">
+          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="l{.^zxlx*,.6|lNRIIL5" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+            <field name="TEXT">AIzaSyAveXRcqG6PEP-99hHoHcVsMeSR9Ku5sw8</field>
+          </shadow>
+        </value>
+        <value name="ARG1">
+          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="Dp,$RB6OugAIod,GYcni" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+            <field name="TEXT">meu-posto-favorito-6d534.firebaseapp.com</field>
+          </shadow>
+        </value>
+        <value name="ARG2">
+          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="sdt@xpR,sA?{!5Dc![^S" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+            <field name="TEXT">https://meu-posto-favorito-6d534.firebaseio.com</field>
+          </shadow>
+        </value>
+        <value name="ARG3">
+          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="h|bJ[zKOoZ[X~_BTUb9=" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+            <field name="TEXT">meu-posto-favorito-6d534</field>
+          </shadow>
+        </value>
+        <value name="ARG4">
+          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="xk//Noq,~i.fyhF.f/RJ" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+            <field name="TEXT">meu-posto-favorito-6d534.appspot.com</field>
+          </shadow>
+        </value>
+        <value name="ARG5">
+          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="5i2[JMAp2}Fy{+{)(ZDJ" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+            <field name="TEXT">557900396365</field>
+          </shadow>
+        </value>
+        <value name="ARG6">
+          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="9r^0-4es3P@|/0lH0pT|" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="ARG7">
+          <shadow colour="#5ba593" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="FZOdMYWMA2/N)H6)ptQR" origintype="text" output="true" tooltip="function () { [native code] }" type="text">
+            <field name="TEXT">1:557900396365:android:89342e52a8a576e0
+</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+</blockly>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><blockly formTarget="" resourceType="JAVA" ruleDescription="Serviços Externos" ruleName="Serviços Externos" ruleSynchronous="false" ruleTimeout="" ruleType="I">
+  <metadata scale="1" scrollx="357.0000000000002" scrolly="-1.1368683772161603e-13" target="Anb:u5+^,0vLkL9QIqn5"/>
+  <block colour="#995ba5" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" x="-307" y="38">
+    <field name="NAME">Post</field>
+    <comment h="80" pinned="false" w="160">Serviços Externos</comment>
+  </block>
+</blockly>

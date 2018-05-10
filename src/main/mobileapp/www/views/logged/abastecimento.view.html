@@ -36,7 +36,7 @@
         <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting"> 
           <div class="list"> 
             <!-- data begin --> 
-            <label for="textinput-data" class="item item-input item-stacked-label"> <span class="input-label">Data</span> <input type="datetime" placeholder="Data" ng-model="Abastecimento.active.data" id="textinput-data" name="textinput-data"> </label> 
+            <label for="textinput-data" class="item item-input item-stacked-label"> <span class="input-label">Data</span> <input type="datetime" placeholder="Data" ng-model="Abastecimento.active.data" id="textinput-data" name="textinput-data" ng-click="cronapi.util.makeCallServerBlocklyAsync('blockly.Data:obter_data_atual', null, null)"> </label> 
             <!-- km begin --> 
             <label for="textinput-km" class="item item-input item-stacked-label"> <span class="input-label">Km</span> <input type="text" placeholder="Km" ng-model="Abastecimento.active.km" id="textinput-km" name="textinput-km"> </label> 
             <!-- valorAbastecimento begin --> 

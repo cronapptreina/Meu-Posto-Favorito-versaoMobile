@@ -413,26 +413,11 @@
    * @multilayer true
    */
   this.cronapi.util.downloadFile = function(url) {
-
-    var id = 'IFRAME' + parseInt((Math.random() * 9999999));
-    var iframe;
-    if(document.all) {
-      iframe = window.document.createElement("<iframe name='" + id + "' id='" + id + "'>");
-    }
-    else {
-      iframe = window.document.createElement("iframe");
-      iframe.name = id;
-      iframe.id = id;
-    }
-    iframe.frameBorder = 0;
-    iframe.setAttribute("frameborder", "no");
-    iframe.setAttribute("border", 0);
-    iframe.setAttribute("marginwidth", 0);
-    iframe.setAttribute("marginheight", 0);
-    iframe.width = 0;
-    iframe.height = 0;
-    iframe.src = url;
-    window.document.body.appendChild(iframe);
+	if(window.hostApp){
+		this.cronapi.screen.openUrl(window.hostApp + url, '_blank' ,0,0 );
+	}else{
+		this.cronapi.screen.openUrl(url, '_blank' ,0,0 );
+	};
   };
   
   /**
@@ -585,7 +570,7 @@
         if (field.indexOf('vars.') > -1)
           return eval('this.'+field);
         else
-          return eval(field);
+          return this[field];
       }
       return '';
     }
@@ -896,15 +881,18 @@
    * @type function
    * @name {{showModal}}
    * @nameTags Show| Modal| Exibir| Mostrar
+   * @platform W
    * @description {{showModalDesc}}
    * @param {ObjectType.STRING} component {{ComponentParam}}
    * @multilayer true
    */
     this.cronapi.screen.showModal = function(/** @type {ObjectType.OBJECT} @blockType ids_from_screen*/ id) {
+		try{
         $('#'+id).modal('show');
+		}catch(e){
 		$('#'+id).show();
+		}
   };
-  
   
     /**
    * @type function
@@ -915,8 +903,67 @@
    * @multilayer true
    */
     this.cronapi.screen.hideModal = function(/** @type {ObjectType.OBJECT} @blockType ids_from_screen*/ id) {
+		try{
 		$('#'+id).modal('hide');
+		}catch(e){
         $('#'+id).hide();
+		}
+  };
+  
+  
+    /**
+   * @type function
+   * @name {{showModal}}
+   * @nameTags Show| Modal| Exibir| Mostrar
+   * @description {{showModalDesc}}
+   * @platform M
+   * @param {ObjectType.STRING} component {{ComponentParam}}
+   * @multilayer true
+   */
+    this.cronapi.screen.showIonicModal = function(/** @type {ObjectType.OBJECT} @blockType ids_from_screen*/ id) {
+      if($('#'+id).data('cronapp-modal') ) $('#'+id).data('cronapp-modal').remove();
+	    this.cronapi.$scope.$ionicModal.fromTemplateUrl(id, {
+	      scope: this.cronapi.$scope,
+        animation: 'slide-in-up'
+      }).then(function(modal){
+        $('#'+id).data('cronapp-modal', modal);
+        modal.show();
+      })
+  };
+  
+  
+	/**
+   * @type function
+   * @name {{hideModal}}
+   * @nameTags Hide| Modal| Esconder | Fechar
+   * @description {{hideModalDesc}}
+   * @platform M
+   * @param {ObjectType.STRING} component {{ComponentParam}}
+   * @multilayer true
+   */
+    this.cronapi.screen.hideIonicModal = function(/** @type {ObjectType.OBJECT} @blockType ids_from_screen*/ id) {
+      if($('#'+id).data('cronapp-modal')) {
+         var modal = $('#'+id).data('cronapp-modal');
+         modal.remove();
+        $('#'+id).data('cronapp-modal', null);
+      }
+  };
+  
+  /**
+   * @type function
+   * @name {{isShownIonicModal}}
+   * @nameTags isShown| Modal| Exibido
+   * @description {{isShownIonicModallDesc}}
+   * @platform M
+   * @param {ObjectType.STRING} component {{ComponentParam}}
+   * @returns {ObjectType.BOOLEAN}
+   */
+    this.cronapi.screen.isShownIonicModal = function(/** @type {ObjectType.OBJECT} @blockType ids_from_screen*/ id) {
+      if($('#'+id).data('cronapp-modal')) {
+         var modal = $('#'+id).data('cronapp-modal');
+         return modal.isShown();
+      }
+      return false;
   };
 
 
@@ -1006,6 +1053,21 @@
   this.cronapi.screen.logout = function() {
     if(this.cronapi.$scope.logout != undefined)
     this.cronapi.$scope.logout();
+  };
+  
+      /**
+   * @type function
+   * @name {{refreshDatasource}}
+   * @nameTags refresh|datasource|atualizar|fonte
+   * @description {{refreshDatasourceDescription}}
+   * @param {ObjectType.STRING} datasource {{datasource}}
+   * @multilayer true
+   */
+  this.cronapi.screen.refreshDatasource = function(/** @type {ObjectType.OBJECT} @blockType datasource_from_screen*/ datasource , /** @type {ObjectType.BOOLEAN} @description {{keepFilters}} @blockType util_dropdown @keys true|false @values {{true}}|{{false}}  */  keepFilters ) {
+    if(keepFilters == true || keepFilters == 'true' ){
+    this[datasource].search(this[datasource].terms , this[datasource].caseInsensitive);
+    }else
+    this[datasource].search("", this[datasource].caseInsensitive);
   };
 
   /**
@@ -1763,6 +1825,21 @@
    this.cronapi.logic.isNullOrEmpty = function(/** @type {ObjectType.OBJECT} @description */ value) {
      return (this.cronapi.logic.isNull(value) || this.cronapi.logic.isEmpty(value));
    }
+   
+   
+   /**
+   * @type function
+    * @name {{}}
+    * @nameTags typeOf
+    * @description {{typeOfDescription}}
+    * @returns {ObjectType.OBJECT}
+    * @displayInline true
+   */
+   this.cronapi.logic.typeOf = function(/** @type {ObjectType.OBJECT} @description {{value}} */ value, /** @type {ObjectType.OBJECT} @description {{typeOf}} @blockType util_dropdown @keys string|number|undefined|object|function|array  @values {{string}}|{{number}}|{{undefined}}|{{object}}|{{function}}|{{array}}  */ type) {
+     if(type==='array') return Array.isArray(value);
+     if(type==='object' && Array.isArray(value)) return false;
+     return (typeof(value) === type);
+   }
   
   this.cronapi.i18n = {};
 
@@ -1798,11 +1875,11 @@
   
   this.cronapi.internal.startCamera = function(field) {
     var cameraContainer =   '<div class="camera-container" style="margin-left:-$marginleft$;margin-top:-$margintop$">\
-                                    <div class="btn btn-success" id="cronapiVideoCaptureOk" style="position: absolute; z-index: 999999999;">\
-                                        <span class="glyphicon glyphicon-ok"></span>\
+                                    <div class="btn btn-success button button-balanced" id="cronapiVideoCaptureOk" style="position: absolute; z-index: 999999999;">\
+                                        <span class="glyphicon glyphicon-ok icon ion-checkmark-round"></span>\
                                     </div>\
-                                    <div class="btn btn-danger" id="cronapiVideoCaptureCancel" style="position: absolute; margin-left: 42px; z-index: 999999999;">\
-                                        <span class="glyphicon glyphicon-remove"></span>\
+                                    <div class="btn btn-danger button button-assertive button-cancel-capture" id="cronapiVideoCaptureCancel" style="position: absolute; margin-left: 42px; z-index: 999999999;">\
+                                        <span class="glyphicon glyphicon-remove icon ion-android-close"></span>\
                                     </div>\
                                     <video id="cronapiVideoCapture" style="height: $height$; width: $width$;" autoplay=""></video>\
                             </div>';
@@ -1880,6 +1957,66 @@
         }.bind(this));
     }
   }; 
+  
+  this.cronapi.internal.downloadFileEntityMobile = function(datasource, field, indexData) {
+    var tempJsonFileUploaded = null;
+    var valueContent;
+    var itemActive;
+    if (indexData) {
+      valueContent = datasource.data[indexData][field];
+      itemActive = datasource.data[indexData];
+    }
+    else {
+      try {
+        valueContent = datasource.active[field]; 
+        itemActive = datasource.active;
+      }
+      catch (e) {
+        valueContent = datasource[field]; 
+        itemActive = datasource;
+      }
+    }
+    //Verificando se é JSON Uploaded file
+    try {
+      var tempJsonFileUploaded = JSON.parse(valueContent);
+    }
+    catch(e) { }
+    
+    if (tempJsonFileUploaded) {
+      window.open(window.hostApp + '/api/cronapi/filePreview/' + tempJsonFileUploaded.path, '_system');
+    }
+    else if (valueContent.indexOf('dropboxusercontent') > -1) {
+      window.open(valueContent, '_system');
+    }
+    else {
+      var url = '/api/cronapi/downloadFile';
+      var splited = datasource.entity.split('/');
+      
+      var entity = splited[splited.length-1];
+      if (entity.indexOf(":") > -1) {
+        //Siginifica que é relacionamento, pega a entidade do relacionamento
+        var entityRelation = '';
+        var splitedDomainBase = splited[3].split('.');
+        for (var i=0; i<splitedDomainBase.length-1;i++)
+          entityRelation += splitedDomainBase[i]+'.';
+        var entityRelationSplited = entity.split(':');
+        entity = entityRelation + entityRelationSplited[entityRelationSplited.length-1];
+      }
+      url += '/' + entity;
+      url += '/' + field;
+      var object = itemActive;
+      var ids = datasource.getKeyValues(object);
+      var currentIdxId = 0;
+      for (var attr in ids) { 
+        if (currentIdxId == 0)
+          url  = url + '/' + object[attr];
+        else
+          url  = url + ':' + object[attr];
+        currentIdxId++;
+      }
+      window.open(window.hostApp + url, '_system');
+    }
+  };
    
   this.cronapi.internal.captureFromCamera = function(field, width, height) {
     var canvas = document.createElement("canvas"); // create img tag
@@ -2090,11 +2227,22 @@
     * @returns {ObjectType.OBJECT}
    */
    this.cronapi.object.getProperty = function(object, property) {
-     var split = property.split('.');
-     for (var i = 0; i < split.length; i++){ 
-       object = object[split[i]];
-     }
-     return object;
+	   
+	var splited = property.split('.');
+    if(splited.length > 1 ){
+    var recursiva = function(object, params , idx) {
+       if (!idx) idx = 0;
+       if(object[params[idx]] === undefined)
+       object[params[idx]] = {};
+       idx++;
+       if (idx < params.length)
+         return recursiva(object[params[idx -1]], params , idx);
+    	else return object[params[idx-1]];
+    };
+    return recursiva(object , splited , 0);
+    }else{
+      return object[property];
+    }
    };
    
     /**
@@ -2108,11 +2256,33 @@
     * @returns {ObjectType.VOID}
    */
    this.cronapi.object.setProperty = function(object, property, value) {
-     var split = property.split('.');
-     for (var i = 0; i < split.length; i++){ 
-       object = object[split[i]];
-     }
-     object = value;
+	var splited = property.split('.');
+    if(splited.length > 1 ){
+    var recursiva = function(object, params,value , idx) {
+       if (!idx) idx = 0;
+       if(object[params[idx]] === undefined)
+       object[params[idx]] = {};
+       idx++;
+       if (idx < params.length)
+         recursiva(object[params[idx -1]], params, value , idx);
+    	else object[params[idx-1]] = value;
+    };
+    recursiva(object , splited , value, 0);
+    }else{
+      object[property] = value;
+    }
+   };
+   
+	/**
+    * @type function
+    * @name {{createObject}}
+	* @description {{createObjectDescription}}
+    * @nameTags object
+    * @param {ObjectType.STRING} string {{string}}
+    * @returns {ObjectType.OBJECT}
+   */
+   this.cronapi.object.createObjectFromString = function(string) {
+    return JSON.parse(string);
    };  
     
    /**
@@ -2469,7 +2639,7 @@
       * @name {{executeSql}}
       * @nameTags executesql
       * @param {ObjectType.STRING} text {{text}}
-      * @param {ObjectType.OBJECT} array {{array}}
+      * @param {ObjectType.OBJECT} array {{arrayParams}}
       * @param {ObjectType.STATEMENTSENDER} success {{success}}
       * @param {ObjectType.STATEMENTSENDER} error {{error}}
       * @description {{executeSqlDescription}}
@@ -2535,9 +2705,9 @@
   };
 
   this.cronapi.internal.removeAccents = function(value) {
-    withAccents = 'áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ';
-    withoutAccents = 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC';
-    newValue = '';
+    var withAccents = 'áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ';
+    var withoutAccents = 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC';
+    var newValue = '';
     for (i = 0; i < value.length; i++) {
       if (withAccents.search(value.substr(i, 1)) >= 0) {
         newValue += withoutAccents.substr(withAccents.search(value
@@ -2667,7 +2837,7 @@
    * @type internal
    */
   this.cronapi.util.upload = function(id, description, filter, maxSize, multiple) {
-    this.UploadService.upload({'description': description, 'id' : id, 'filter' : filter, 'maxSize': maxSize, 'multiple': multiple});
+    this.UploadService.upload({'description': description, 'id' : id, 'filter' : filter, 'maxSize': maxSize, 'multiple': multiple, 'scope': this});
   };
   
   
@@ -2686,7 +2856,7 @@
    * @description {{createChartDescription}}
    * @arbitraryParams true
    */
-  this.cronapi.chart.createChart = function(/** @type {ObjectType.OBJECT} @description {{createChartId}} @blockType ids_from_screen*/ chartId,  /** @type {ObjectType.STRING} @description {{createChartType}} @blockType util_dropdown @keys line|bar|doughnut|pie  @values line|bar|doughnut|pie  */ type, /** @type {ObjectType.LIST} @description {{createChartLegends}} */  chartLegends, /** @type {ObjectType.LIST} @description {{createChartOptions}} */ options, /** @type {ObjectType.LIST}  @description {{createChartSeries}}  */ series) {
+  this.cronapi.chart.createChart = function(/** @type {ObjectType.OBJECT} @description {{createChartId}} @blockType ids_from_screen*/ chartId,  /** @type {ObjectType.STRING} @description {{createChartType}} @blockType util_dropdown @keys line|bar|doughnut|pie|polarArea  @values line|bar|doughnut|pie|polarArea  */ type, /** @type {ObjectType.LIST} @description {{createChartLegends}} */  chartLegends, /** @type {ObjectType.LIST} @description {{createChartOptions}} */ options, /** @type {ObjectType.LIST}  @description {{createChartSeries}}  */ series) {
   
   var CSS_COLOR_NAMES = ["#FF5C00","#0E53A7","#48DD00","#FFD500","#7309AA","#CD0074","#00AF64","#BF8230","#F16D95","#A65000","#A65000","#AF66D5"];
   var colorIndex = 0;
@@ -2704,6 +2874,16 @@ function getColumn(position, datasets){
       if(value.data[position] != undefined) column.push(value.data[position]); 
     });
   return column;
+}
+
+function displayLegend(){
+  if(json.data.datasets[0].label ==""){
+    if(json.options.legend == undefined){
+      json.options.legend ={};
+      json.options.legend.display = false;
+    }else
+    json.options.legend.display = false;
+  }
 }
 
 function getDataset(args){
@@ -2746,14 +2926,26 @@ function beginAtZero(){
   var json = {};
   json.type = type;
   json.data = [];
-  json.options= [];
+  json.options= {};
   if(Array.isArray(chartLegends)){
    json.data.labels = chartLegends;
   }else
   json.data.labels = JSON.parse(chartLegends);
   json.data.datasets = [];
-  if(Array.isArray(options)) json.options = options; else if(options != "" || options != null) try {json.options = JSON.parse(options);}catch(e){console.log(e);}
-  
+  if(Array.isArray(options)) json.options = options; 
+    else if(options != "" && options != null) {
+      try {
+        json.options = JSON.parse(options);
+        
+      }catch(e){
+        json.options={};
+        console.log(e);
+      }
+    }else {
+      json.options= {};
+    }
+	
+	
   switch(type){
     case 'line':{
      json.data.datasets = getDataset(arguments);
@@ -2763,6 +2955,7 @@ function beginAtZero(){
           value.backgroundColor = CSS_COLOR_NAMES[nextColor()]; 
           value.borderColor = value.backgroundColor;
           beginAtZero();
+		  displayLegend();
         });
           
       break;
@@ -2775,10 +2968,10 @@ function beginAtZero(){
           value.borderColor = value.backgroundColor;
         });
         beginAtZero();
+		displayLegend();
       break;
     }
-    
-    
+        
     case 'doughnut':{
       var ds = getDataset(arguments);
         $.each(ds, function(index, value){
@@ -2807,6 +3000,23 @@ function beginAtZero(){
           $.each(dtset.data, function(indexx,valuee){
              dtset.backgroundColor.push( CSS_COLOR_NAMES[nextColor()] );
          
+          });
+            dtset.borderColor =  dtset.backgroundColor;
+             json.data.datasets.push(dtset);
+            colorIndex = 0;
+        });
+      break;
+    }
+	
+	case 'polarArea':{
+      var ds = getDataset(arguments);
+        $.each(ds, function(index, value){
+          var dtset = {};
+           dtset = ds[index];
+          dtset.backgroundColor = [];
+          dtset.borderColor = [];
+          $.each(dtset.data, function(indexx,valuee){
+             dtset.backgroundColor.push( CSS_COLOR_NAMES[nextColor()] );
           });
             dtset.borderColor =  dtset.backgroundColor;
              json.data.datasets.push(dtset);

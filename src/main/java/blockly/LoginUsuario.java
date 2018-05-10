@@ -20,7 +20,7 @@ public class LoginUsuario {
 		return new Callable<Var>() {
 
 			public Var call() throws Exception {
-				return cronapi.util.Operations.getCurrentUserName();
+				return Var.valueOf(cronapi.util.Operations.getCurrentUserName());
 			}
 		}.call();
 	}

@@ -9,7 +9,9 @@ var app = (function() {
       'datasourcejs',
       'pascalprecht.translate',
       'tmh.dynamicLocale',
-      'ui-notification'
+      'ui-notification',
+      'ngFileUpload',
+	  'angularMoment'
     ])
     .constant('LOCALES', {
       'locales': {
@@ -166,11 +168,23 @@ var app = (function() {
         }
       };
     }])
-
+    .decorator("$xhrFactory", [
+      "$delegate", "$injector",
+      function($delegate, $injector) {
+        return function(method, url) {
+          var xhr = $delegate(method, url);
+          var $http = $injector.get("$http");
+          var callConfig = $http.pendingRequests[$http.pendingRequests.length - 1];
+          if (angular.isFunction(callConfig.onProgress))
+            xhr.upload.addEventListener("progress",callConfig.onProgress);
+          return xhr;
+        };
+      }
+    ])
     // General controller
-    .controller('PageController', ["$scope", "$stateParams", "Notification", "$location", "$http", "$rootScope", function($scope, $stateParams, Notification, $location, $http, $rootScope) {
+    .controller('PageController', ["$scope", "$stateParams", "Notification", "$location", "$http", "$rootScope","$ionicModal", function($scope, $stateParams, Notification, $location, $http, $rootScope, $ionicModal) {
 
-	    app.registerEventsCronapi($scope, $translate);
+	    app.registerEventsCronapi($scope, $translate, $ionicModal);
       $rootScope.http = $http;
       $scope.Notification = Notification;
 	
@@ -256,7 +270,7 @@ app.bindScope = function($scope, obj) {
   return newObj;
 };
 
-app.registerEventsCronapi = function($scope, $translate) {
+app.registerEventsCronapi = function($scope, $translate,$ionicModal) {
   for (var x in app.userEvents)
     $scope[x] = app.userEvents[x].bind($scope);
 
@@ -266,6 +280,7 @@ app.registerEventsCronapi = function($scope, $translate) {
     if (cronapi) {
       $scope['cronapi'] = app.bindScope($scope, cronapi);
       $scope['cronapi'].$scope = $scope;
+	  $scope['cronapi'].$scope.$ionicModal = $ionicModal;
       $scope.safeApply = safeApply;
       if ($translate) {
         $scope['cronapi'].$translate = $translate;

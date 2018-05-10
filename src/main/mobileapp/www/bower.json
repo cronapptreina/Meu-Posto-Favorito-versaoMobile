@@ -23,8 +23,9 @@
 		"src"
 	],
 	"dependencies": {
-		"cronapp-framework-mobile-js": "0.0.52",
-		"cronapi-js": "0.0.103-d-s-b"
+		"cronapp-framework-mobile-js": "0.0.72-d-s-b",
+		"cronapi-js": "0.0.118-d-s-b",
+		"cronapi-firebase": "0.0.5"
 	},
 	"resolutions": {
 		"angular": ">= 1.0.8"

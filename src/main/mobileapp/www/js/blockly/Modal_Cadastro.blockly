@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><blockly formTarget="src/main/mobileapp/www/views/login.view.html" resourceType="JS" ruleDescription="Modal_Cadastro" ruleName="Modal_Cadastro" ruleSecurity="{&quot;execute&quot;:&quot;Public&quot;}" ruleSynchronous="false" ruleTimeout="300" ruleType="I">
-  <metadata scale="1" scrollx="357" scrolly="5.684341886080802e-14" target="(`xH}pjZC5s0h0Wpai`t"/>
+  <metadata scale="1" scrollx="356.9999999999999" scrolly="5.684341886080802e-14" target="(`xH}pjZC5s0h0Wpai`t"/>
   <block colour="#995ba5" id="(`xH}pjZC5s0h0Wpai`t" origintype="procedures_defreturn" output="false" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" x="-277" y="38">
     <field name="NAME">Esconder</field>
     <comment h="80" pinned="false" w="160">Descreva esta função...</comment>
     <statement name="STACK">
       <block colour="#934848" dependencyby="(`xH}pjZC5s0h0Wpai`t" id="|,8KzWB?ptcV6GFawP)i" multilayer="true" namespace="cronapi.screen.hideModal" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EEsconder%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20esconde%20um%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Identificador%20:%20Objeto%3C/span%3E%3Cdiv%3E%20Identificador%20do%20componente%20a%20ser%20modificado%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.screen.hideModal%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.screen.hideModal%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn">
-        <mutation name="{{cronapi.screen.hideModal}}">
-          <arg cronapi-type="ObjectType.OBJECT" name="Identificador"/>
+        <mutation name="{{cronapi.screen.hideModal}}" return-raw-type="undefined">
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.OBJECT" name="Identificador"/>
         </mutation>
         <value name="ARG0">
-          <block colour="#934848" id="c_~9M8M|~F,ULRNMHIwl" origintype="ids_from_screen" output="true" type="ids_from_screen">
+          <block colour="#934848" dependencyby="(`xH}pjZC5s0h0Wpai`t" id="c_~9M8M|~F,ULRNMHIwl" origintype="ids_from_screen" output="true" type="ids_from_screen">
             <field name="SELECT">modal83858</field>
           </block>
         </value>
@@ -21,11 +21,11 @@
     <comment h="80" pinned="false" w="160">Modal_Cadastro</comment>
     <statement name="STACK">
       <block colour="#934848" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="osZF8g(1PlYH3Tt+I1)8" multilayer="true" namespace="cronapi.screen.showModal" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EExibir%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20exibe%20um%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Identificador%20:%20Objeto%3C/span%3E%3Cdiv%3E%20Identificador%20do%20componente%20a%20ser%20modificado%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20target=%22_blank%22%20href=%22https://docs.cronapp.io/display/CRON2/cronapi.screen.showModal%22%3Ehttps://docs.cronapp.io/display/CRON2/cronapi.screen.showModal%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn">
-        <mutation name="{{cronapi.screen.showModal}}">
-          <arg cronapi-type="ObjectType.OBJECT" name="Identificador"/>
+        <mutation name="{{cronapi.screen.showModal}}" return-raw-type="undefined">
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.OBJECT" name="Identificador"/>
         </mutation>
         <value name="ARG0">
-          <block colour="#934848" id="d6a?V.yNMrMHdXY11B6?" origintype="ids_from_screen" output="true" type="ids_from_screen">
+          <block colour="#934848" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="d6a?V.yNMrMHdXY11B6?" origintype="ids_from_screen" output="true" type="ids_from_screen">
             <field name="SELECT">modal83858</field>
           </block>
         </value>

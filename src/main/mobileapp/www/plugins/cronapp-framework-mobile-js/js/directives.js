@@ -1,7 +1,7 @@
 (function($app) {
 
   /**
-   * Função que retorna o formato que será utilizado no componente
+   * Fun��o que retorna o formato que ser� utilizado no componente
    * capturando o valor do atributo format do elemento, para mais formatos
    * consulte os formatos permitidos em http://momentjs.com/docs/#/parsing/string-format/
    *
@@ -53,88 +53,8 @@
     return result;
     }
 
-  /**
-   * Em todo elemento que possuir o atibuto as-date será
-   * aplicado o componente Datetimepicker (http://eonasdan.github.io/bootstrap-datetimepicker/)
-   *
-   * O componente se adequa de acordo com o formato, definido através do atributo format
-   * espeficado no elemento.
-   * Para data simples use format="DD/MMM/YYYY", para data e hora use format="DD/MM/YYYY HH:mm:ss"
-   *
-   * @see http://eonasdan.github.io/bootstrap-datetimepicker/
-   */
-  app.directive('asDate', function() {
-      return {
-        require: '^ngModel',
-        restrict: 'A',
-        link: function(scope, element, attrs, ngModel) {
-          if (!ngModel) {
-            return;
-          }
-
-          var format = patternFormat(element);
-
-          var options = {
-            format: format,
-            locale: 'pt-BR',
-            showTodayButton: true,
-            useStrict: true,
-            tooltips: {
-              today: 'Hoje',
-              clear: 'Limpar seleção',
-              close: 'Fechar',
-              selectMonth: 'Selecionar mês',
-              prevMonth: 'Mês anterior',
-              nextMonth: 'Próximo mês',
-              selectYear: 'Selecionar ano',
-              prevYear: 'Ano anterior',
-              nextYear: 'Próximo ano',
-              selectDecade: 'Selecionar década',
-              prevDecade: 'Década anterior',
-              nextDecade: 'Próxima década',
-              prevCentury: 'Século anterior',
-              nextCentury: 'Próximo século'
-            }
-          };
-
-          if (format != 'DD/MM/YYYY') {
-            options.sideBySide = true;
-          }
-
-          element.datetimepicker(options);
-
-          element.on('dp.change', function() {
-            if ($(this).is(":visible"))
-              scope.$apply(read);
-          });
-
-          ngModel.$render = function() {
-            if (ngModel.$viewValue) {
-              var dateInMilliseconds = parseInt(ngModel.$viewValue, 10);
-              var momentDate = moment(dateInMilliseconds);
-              if (momentDate.isValid()) {
-                element.val(momentDate.format(patternFormat(element)));
-              } else {
-                element.val('');
-              }
-            } else {
-              element.data("DateTimePicker").clear();
-              element.val('');
-            }
-          }
-
-          read();
-
-          function read() {
-            var value = element.val();
-            var momentDate = moment(value, patternFormat(element));
-            if (momentDate.isValid())
-              ngModel.$setViewValue(momentDate.toDate());
-          }
-        }
-      };
-    })
-
+    app.directive('asDate', maskDirectiveAsDate)
+    
     .directive('ngDestroy', function() {
       return {
         restrict: 'A',
@@ -149,7 +69,130 @@
         }
       }
     })
+    
+    .filter('mask',function($translate) {
+        return function(value, maskValue) {
+          debugger;
+          maskValue = parseMaskType(maskValue, $translate);
+          if (!maskValue)
+            return value;
 
+          maskValue = maskValue.replace(';1', '').replace(';0', '').trim();
+
+          if (typeof value == "string" && value.match(isoDate)) {
+            return moment.utc(value).format(maskValue);
+          } else if (value instanceof Date) {
+            return moment.utc(value).format(maskValue);
+          } else if (typeof value == 'number') {
+            return format(maskValue, value);
+          }  else if (value != undefined && value != null && value != "") {
+            var input = $("<input type=\"text\">");
+            input.mask(maskValue);
+            return input.masked(value);
+          } else {
+            return value;
+          }
+        };
+      })
+
+      .directive('mask', maskDirectiveMask)
+    
+    .directive('dynamicImage', function($compile) {
+        var template = '';
+        return {
+          restrict: 'A',
+          scope: true,
+          require: 'ngModel',
+          link: function(scope, element, attr) {
+            debugger;
+            var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
+            var content = element.html();
+            var templateDyn    =
+                '<div ngf-drop="" ngf-drag-over-class="dragover">\
+                   <img style="width: 100%;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
+                   <div class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
+                     $userHtml$\
+                   </div>\
+                   <div class="remove-image-button button button-assertive" ng-if="$ngModel$" ng-click="$ngModel$=null">\
+                     <span class="icon ion-android-close"></span>\
+                   </div>\
+                   <div class="button button-positive" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\')">\
+                     <span class="icon ion-ios-videocam"></span>\
+                   </div>\
+                 </div>';
+            var maxFileSize = "";
+            if (attr.maxFileSize)
+              maxFileSize = attr.maxFileSize;
+
+            templateDyn = $(templateDyn
+                .split('$ngModel$').join(attr.ngModel)
+                .split('$required$').join(required)
+                .split('$userHtml$').join(content)
+                .split('$maxFileSize$').join(maxFileSize)
+            );
+
+            $(element).html(templateDyn);
+            $compile(templateDyn)(element.scope());
+          }
+        }
+    })
+    .directive('dynamicFile', function($compile) {
+        var template = '';
+        return {
+          restrict: 'A',
+          scope: true,
+          require: 'ngModel',
+          link: function(scope, element, attr) {
+            var s = scope;
+            var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
+
+            var splitedNgModel = attr.ngModel.split('.');
+            var datasource = splitedNgModel[0];
+            var field = splitedNgModel[splitedNgModel.length-1];
+            var number = Math.floor((Math.random() * 1000) + 20);
+            var content = element.html();
+
+            var maxFileSize = "";
+            if (attr.maxFileSize)
+              maxFileSize = attr.maxFileSize;
+
+            var templateDyn    = '\
+                                <div ng-show="!$ngModel$" ngf-drop="" ngf-drag-over-class="dragover">\
+                                  <div class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
+                                    $userHtml$\
+                                  </div>\
+                                  <div class="progress" data-type="bootstrapProgress" id="uploadprogress$number$" style="display:none">\
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">\
+                                      <span class="sr-only"></span>\
+                                    </div>\
+                                  </div>\
+                                </div> \
+                                <div ng-show="$ngModel$" class="upload-image-component-attribute"> \
+                                  <div class="button button-assertive" style="float:right;" ng-if="$ngModel$" ng-click="$ngModel$=null"> \
+                                    <span class="icon ion-android-close"></span> \
+                                  </div> \
+                                  <div> \
+                                    <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$)"></div> \
+                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntityMobile($datasource$,\'$field$\')">download</a> \
+                                  </div> \
+                                </div> \
+                                ';
+            templateDyn = $(templateDyn
+                .split('$ngModel$').join(attr.ngModel)
+                .split('$datasource$').join(datasource)
+                .split('$field$').join(field)
+                .split('$number$').join(number)
+                .split('$required$').join(required)
+                .split('$userHtml$').join(content)
+                .split('$maxFileSize$').join(maxFileSize)
+
+            );
+
+            $(element).html(templateDyn);
+            $compile(templateDyn)(element.scope());
+          }
+        }
+    })
     .directive('pwCheck', [function() {
       'use strict';
       return {
@@ -166,11 +209,124 @@
       }
     }])
 
+	.directive('qr', ['$window', function($window){
+		return {
+		  restrict: 'A',
+		  require: '^ngModel',
+		  template: '<canvas ng-hide="image"></canvas><img ng-if="image" ng-src="{{canvasImage}}"/>',
+		  link: function postlink(scope, element, attrs, ngModel){
+			if (scope.size === undefined  && attrs.size) {
+			  scope.text = attrs.size;
+			}
+		  var getTypeNumeber = function(){
+		  return scope.typeNumber || 0;
+		};
+		var getCorrection = function(){
+		  var levels = {
+			'L': 1,
+			'M': 0,
+			'Q': 3,
+			'H': 2
+		  };
+		var correctionLevel = scope.correctionLevel || 0;
+		  return levels[correctionLevel] || 0;
+		};
+		var getText = function(){
+		  return ngModel.$modelValue || "";
+		};
+		var getSize = function(){
+		  return scope.size || $(element).outerWidth();
+		};
+		var isNUMBER = function(text){
+		  var ALLOWEDCHARS = /^[0-9]*$/;
+		  return ALLOWEDCHARS.test(text);
+		};
+		var isALPHA_NUM = function(text){
+		  var ALLOWEDCHARS = /^[0-9A-Z $%*+\-./:]*$/;
+		  return ALLOWEDCHARS.test(text);
+		};
+		var is8bit = function(text){
+		  for (var i = 0; i < text.length; i++) {
+			var code = text.charCodeAt(i);
+			if (code > 255) {
+			  return false;
+			}
+		  }
+		  return true;
+		};
+		var checkInputMode = function(inputMode, text){
+		  if (inputMode === 'NUMBER' && !isNUMBER(text)) {
+			throw new Error('The `NUMBER` input mode is invalid for text.');
+		  }
+		  else if (inputMode === 'ALPHA_NUM' && !isALPHA_NUM(text)) {
+			throw new Error('The `ALPHA_NUM` input mode is invalid for text.');
+		  }
+		  else if (inputMode === '8bit' && !is8bit(text)) {
+			throw new Error('The `8bit` input mode is invalid for text.');
+		  }
+		  else if (!is8bit(text)) {
+			throw new Error('Input mode is invalid for text.');
+		  }
+		  return true;
+		};
+		var getInputMode = function(text){
+		  var inputMode = scope.inputMode;
+		  inputMode = inputMode || (isNUMBER(text) ? 'NUMBER' : undefined);
+		  inputMode = inputMode || (isALPHA_NUM(text) ? 'ALPHA_NUM' : undefined);
+		  inputMode = inputMode || (is8bit(text) ? '8bit' : '');
+		  return checkInputMode(inputMode, text) ? inputMode : '';
+		};
+		var canvas = element.find('canvas')[0];
+		var canvas2D = !!$window.CanvasRenderingContext2D;
+		scope.TYPE_NUMBER = getTypeNumeber();
+		scope.TEXT = getText();
+		scope.CORRECTION = getCorrection();
+		scope.SIZE = getSize();
+		scope.INPUT_MODE = getInputMode(scope.TEXT);
+		scope.canvasImage = '';
+		var draw = function(context, qr, modules, tile){
+		  for (var row = 0; row < modules; row++) {
+			for (var col = 0; col < modules; col++) {
+			  var w = (Math.ceil((col + 1) * tile) - Math.floor(col * tile)),
+				  h = (Math.ceil((row + 1) * tile) - Math.floor(row * tile));
+			  context.fillStyle = qr.isDark(row, col) ? '#000' : '#fff';
+			  context.fillRect(Math.round(col * tile), Math.round(row * tile), w, h);
+			}
+		  }
+		};
+		var render = function(canvas, value, typeNumber, correction, size, inputMode){
+		  var trim = /^\s+|\s+$/g;
+		  var text = value.replace(trim, '');
+		  debugger;
+		  var qr = new QRCode(typeNumber, correction, inputMode);
+		  qr.addData(text);
+		  qr.make();
+		  var context = canvas.getContext('2d');
+		  var modules = qr.getModuleCount();
+		  var tile = size / modules;
+		  canvas.width = canvas.height = size;
+		  if (canvas2D) {
+			draw(context, qr, modules, tile);
+			scope.canvasImage = canvas.toDataURL() || '';
+		  }
+		};
+		
+		scope.$watch(function(){return ngModel.$modelValue}, function(value, old){
+		if (value !== old) {
+		  scope.text = ngModel.$modelValue;
+		  scope.TEXT = getText();
+		  scope.INPUT_MODE = getInputMode(scope.TEXT);
+		  render(canvas, scope.TEXT, scope.TYPE_NUMBER, scope.CORRECTION, scope.SIZE, scope.INPUT_MODE);
+		}
+	  });
+		render(canvas, scope.TEXT, scope.TYPE_NUMBER, scope.CORRECTION, scope.SIZE, scope.INPUT_MODE);
+		}};
+	  }])
 
     /**
-     * Validação de campos CPF e CNPJ,
+     * Valida��o de campos CPF e CNPJ,
      * para utilizar essa diretiva, adicione o atributo valid com o valor
-     * do tipo da validação (cpf ou cnpj). Exemplo <input type="text" valid="cpf">
+     * do tipo da valida��o (cpf ou cnpj). Exemplo <input type="text" valid="cpf">
      */
     .directive('valid', function() {
       return {
@@ -186,7 +342,7 @@
             var value = modelValue || viewValue;
             var fieldValid = validator[attrs.valid].isValid(value);
             if (!fieldValid) {
-              element[0].setCustomValidity(element[0].dataset['errorMessage']);
+              element.scope().$applyAsync(function(){ element[0].setCustomValidity(element[0].dataset['errorMessage']); }) ;
             } else {
               element[0].setCustomValidity("");
             }
@@ -339,7 +495,7 @@
             //Se for do tipo text passa parametro como like
             if (typeElement == 'text')
               filterTemplate += this + '@' + operator + '%{value}%;';
-            //Senão passa parametro como valor exato
+            //Sen�o passa parametro como valor exato
             else
               filterTemplate += this + operator + '{value};';
           }
@@ -490,3 +646,228 @@
   })  
 	
 }(app));
+function maskDirectiveAsDate($compile, $translate) {
+  return maskDirective($compile, $translate, 'as-date');
+}
+
+function maskDirectiveMask($compile, $translate) {
+  return maskDirective($compile, $translate, 'mask');
+}
+
+function maskDirective($compile, $translate, attrName) {
+  return {
+    restrict: 'A',
+    require: '?ngModel',
+    link: function (scope, element, attrs, ngModelCtrl) {
+      if(attrName == 'as-date' && attrs.mask !== undefined)
+        return;
+
+
+      var $element = $(element);
+
+      var type = $element.attr("type");
+
+      if (type == "checkbox" || type == "password")
+        return;
+
+      $element.data("type", type);
+
+      if (type == 'datetime') {
+        $element.attr('type', 'datetime-local');
+      }
+      else if (type == 'time-local') {
+        $element.attr('type', 'time');
+      }
+      else if (type == 'integer' || type == 'number' || type == 'money') {
+        $element.attr('type', 'tel');
+      }
+      if (ngModelCtrl) {
+        ngModelCtrl.$formatters = [];
+        ngModelCtrl.$parsers = [];
+      }
+
+      if (attrs.asDate !== undefined && type == 'text')
+        type = "date";
+
+      var textMask = true;
+
+      var removeMask = false;
+
+      var attrMask = attrs.mask || attrs.format;
+
+      if (!attrMask) {
+        attrMask = parseMaskType(type, $translate);
+      } else {
+        attrMask = parseMaskType(attrMask, $translate);
+      }
+
+      if (attrMask.endsWith(";0")) {
+        removeMask = true;
+      }
+
+      var mask = attrMask.replace(';1', '').replace(';0', '').trim();
+      if (mask == undefined || mask.length == 0) {
+        return;
+      }
+
+      if (!attrs.mask && (type == 'number' || type == 'money' || type == 'integer')) {
+        removeMask = true;
+        textMask = false;
+
+        var currency = mask.trim().replace(/\./g, '').replace(/\,/g, '').replace(/#/g, '').replace(/0/g, '').replace(/9/g, '');
+
+        var prefix = '';
+        var suffix = '';
+        var thousands = '';
+        var decimal = ',';
+        var precision = 0;
+
+        if (mask.startsWith(currency)) {
+          prefix = currency;
+        }
+
+        else if (mask.endsWith(currency)) {
+          suffix = currency;
+        }
+
+        var pureMask = mask.trim().replace(prefix, '').replace(suffix, '').trim();
+
+        if (pureMask.startsWith("#.")) {
+          thousands = '.';
+        }
+        else if (pureMask.startsWith("#,")) {
+          thousands = ',';
+        }
+
+        var dMask = null;
+
+        if (pureMask.indexOf(",0") != -1) {
+          decimal = ',';
+          dMask = ",0";
+        }
+        else if (pureMask.indexOf(".0") != -1) {
+          decimal = '.';
+          dMask = ".0";
+        }
+
+        if (dMask != null) {
+          var strD = pureMask.substring(pureMask.indexOf(dMask) + 1);
+          precision = strD.length;
+        }
+
+
+        var inputmaskType = 'numeric';
+
+        if (precision == 0)
+          inputmaskType = 'integer';
+
+        var ipOptions = {
+          'rightAlign':  (type == 'money'),
+          'unmaskAsNumber': true,
+          'allowMinus': true,
+          'prefix': prefix,
+          'suffix': suffix,
+          'radixPoint': decimal,
+          'digits': precision
+        };
+
+        if (thousands) {
+          ipOptions['autoGroup'] = true;
+          ipOptions['groupSeparator'] = thousands;
+        }
+
+        $(element).inputmask(inputmaskType, ipOptions);
+
+        if (ngModelCtrl) {
+          ngModelCtrl.$formatters.push(function (value) {
+            if (value != undefined && value != null && value != '') {
+              return format(mask, value);
+            }
+
+            return null;
+          });
+
+          ngModelCtrl.$parsers.push(function (value) {
+            if (value != undefined && value != null && value != '') {
+              var unmaskedvalue = $element.inputmask('unmaskedvalue');
+              if (unmaskedvalue != '')
+                return unmaskedvalue;
+            }
+
+            return null;
+          });
+        }
+      }
+      else if (type == 'text' || type == 'tel' || attrs.mask) {
+        var options = {};
+        if (attrs.maskPlaceholder) {
+          options.placeholder = attrs.maskPlaceholder
+        }
+
+        $element.mask(mask, options);
+
+        if (removeMask && ngModelCtrl) {
+          ngModelCtrl.$formatters.push(function (value) {
+            if (value) {
+              return $element.masked(value);
+            }
+
+            return null;
+          });
+
+          ngModelCtrl.$parsers.push(function (value) {
+            if (value) {
+              return $element.cleanVal();
+            }
+
+            return null;
+          });
+        }
+      }
+    }
+  }
+}
+
+function parseMaskType(type, $translate) {
+  if (type == "datetime" || type == "datetime-local") {
+    type = $translate.instant('Format.DateTime');
+    if (type == 'Format.DateTime')
+      type = 'DD/MM/YYYY HH:mm:ss'
+  }
+  else if (type == "date") {
+    type = $translate.instant('Format.Date');
+    if (type == 'Format.Date')
+      type = 'DD/MM/YYYY'
+  }
+  else if (type == "time" || type == "time-local") {
+    type = $translate.instant('Format.Hour');
+    if (type == 'Format.Hour')
+      type = 'HH:mm:ss'
+  }
+  else if (type == "month") {
+    type = 'MMMM';
+  }
+  else if (type == "number") {
+    type = $translate.instant('Format.Decimal');
+    if (type == 'Format.Decimal')
+      type = '0,00'
+  }
+  else if (type == "money") {
+    type = $translate.instant('Format.Money');
+    if (type == 'Format.Money')
+      type = '#.#00,00'
+  }
+  else if (type == "integer") {
+    type = '0';
+  }
+  else if (type == "week") {
+    type = 'dddd';
+  }
+  else if (type == "tel") {
+    type = '(00) 00000-0000;0';
+  }
+  else if (type == "text") {
+    type = '';
+  }
+  return type;
+}

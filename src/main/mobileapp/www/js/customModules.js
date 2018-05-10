@@ -1,0 +1,1 @@
+window.customModules = ["ui.map","ngTouch"];

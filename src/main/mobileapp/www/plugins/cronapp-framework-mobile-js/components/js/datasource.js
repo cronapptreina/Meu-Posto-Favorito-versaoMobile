@@ -46,6 +46,8 @@ angular.module('datasourcejs', [])
         this.links = null;
         this.loadedFinish = null;
         this.lastFilterParsed = null;
+		this.caseInsensitive = null;
+        this.terms = null;
 
         // Private members
         var cursor = 0;
@@ -379,7 +381,7 @@ angular.module('datasourcejs', [])
               this[thisContextDataSet.dependentLazyPostField] = eval(thisContextDataSet.dependentLazyPost).active;
 
               if (thisContextDataSet.entity.indexOf('//') > -1) {
-                var keyObj = getKeyValues(eval(thisContextDataSet.dependentLazyPost).active);
+                var keyObj = this.getKeyValues(eval(thisContextDataSet.dependentLazyPost).active);
                 var suffixPath = '';
                 for (var key in keyObj) {
                   if (keyObj.hasOwnProperty(key)) {
@@ -435,7 +437,7 @@ angular.module('datasourcejs', [])
         this.update = function(obj, callback) {
 
           // Get the keys values
-          var keyObj = getKeyValues(obj);
+          var keyObj = this.getKeyValues(obj);
 
           //TRM
           if (this.dependentBufferLazyPostData && obj.tempBufferId) {
@@ -473,8 +475,8 @@ angular.module('datasourcejs', [])
          * Valid if required field is valid
          */
         this.missingRequiredField = function() {
-          return $('[required][ng-model*="' + this.name + '."]').hasClass('ng-invalid-required') || $('[required][ng-model*="' + this.name + '."]').hasClass('ng-invalid') ||
-              $('[required][ng-model*="' + this.name + '."]').hasClass('ng-empty');
+          return $('[required][ng-model*="' + this.name + '."]').hasClass('ng-invalid-required') || $('[ng-model*="' + this.name + '."]').hasClass('ng-invalid') ||
+              $('[required][ng-model*="' + this.name + '."]').hasClass('ng-empty') || $('[valid][ng-model*="' + this.name + '."]').hasClass('ng-empty');
         }
 
         /**
@@ -522,7 +524,7 @@ angular.module('datasourcejs', [])
             // Make a new request to update the modified item
             this.update(this.active, function(obj) {
               // Get the list of keys
-              var keyObj = getKeyValues(obj);
+              var keyObj = this.getKeyValues(obj);
 
               // For each row data
               this.data.forEach(function(currentRow) {
@@ -530,7 +532,7 @@ angular.module('datasourcejs', [])
                 // current object match with the
                 // extracted key values
                 var found;
-                var dataKeys = getKeyValues(currentRow);
+                var dataKeys = this.getKeyValues(currentRow);
                 for (var key in keyObj) {
                   if (dataKeys[key] && dataKeys[key] === keyObj[key]) {
                     found = true;
@@ -562,7 +564,7 @@ angular.module('datasourcejs', [])
 
         this.refreshActive = function() {
           if (this.active) {
-            var keyObj = getKeyValues(this.active);
+            var keyObj = this.getKeyValues(this.active);
             var url = this.entity;
             url += (this.entity.endsWith('/')) ? '' : '/';
             for (var key in keyObj) {
@@ -709,7 +711,7 @@ angular.module('datasourcejs', [])
               object = this.active;
             }
 
-            var keyObj = getKeyValues(object);
+            var keyObj = this.getKeyValues(object);
 
             //TRM
             if (this.dependentBufferLazyPostData) {
@@ -736,7 +738,7 @@ angular.module('datasourcejs', [])
                 // current object match with the same
                 // vey values
                 // Iterate all keys checking if the
-                var dataKeys = getKeyValues(this.data[i]);
+                var dataKeys = this.getKeyValues(this.data[i]);
                 // Check all keys
                 var found;
                 for (var key in keyObj) {
@@ -781,11 +783,7 @@ angular.module('datasourcejs', [])
           }
         };
 
-        /**
-         * Get the object keys values from the datasource keylist
-         * PRIVATE FUNCTION
-         */
-        var getKeyValues = function(rowData) {
+        this.getKeyValues = function(rowData) {
           var keys = this.keys;
 
           var keyValues = {};
@@ -807,8 +805,8 @@ angular.module('datasourcejs', [])
          * Check if two objects are equals by comparing their keys PRIVATE FUNCTION.
          */
         var objectIsEquals = function(object1, object2) {
-          var keys1 = getKeyValues(object1);
-          var keys2 = getKeyValues(object2);
+          var keys1 = this.getKeyValues(object1);
+          var keys2 = this.getKeyValues(object2);
           for (var key in keys1) {
             if (keys1.hasOwnProperty(key)) {
               if (!keys2.hasOwnProperty(key)) return false;
@@ -1043,6 +1041,8 @@ angular.module('datasourcejs', [])
             this.searchTimeout = null;
           }
 
+		  this.caseInsensitive = caseInsensitive;
+		  this.terms = terms;
           this.searchTimeout = setTimeout(function() {
             this.doSearch(terms, caseInsensitive);
           }.bind(this), 500);
@@ -1116,7 +1116,7 @@ angular.module('datasourcejs', [])
           if (this.dependentLazyPost) {
             if (eval(this.dependentLazyPost).active) {
               var checkRequestId = '';
-              var keyDependentLazyPost = getKeyValues(eval(this.dependentLazyPost).active);
+              var keyDependentLazyPost = this.getKeyValues(eval(this.dependentLazyPost).active);
               for (var key in keyDependentLazyPost) {
                 checkRequestId = keyDependentLazyPost[key]
                 break;

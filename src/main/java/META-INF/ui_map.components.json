@@ -1,0 +1,46 @@
+{
+	"name": "custom-cronos-components",
+	"version": "0.0.0",
+	"components": [
+		{
+			"name": "ui_map",
+			"text_pt_BR": "UI MAP",
+			"text_en_US": "UI MAP",
+			"class": "adjust-icon mdi mdi-checkerboard",
+			"wrapper": false,
+			"templateURL": "__metainf__/ui_map.template.html",
+			"properties": {
+				"onclick": {
+					"type": "event"
+				},
+				"target": {
+					"removable": false,
+					"type": "list",
+					"options": [
+						{
+							"key": "_blank",
+							"value": "Nova janela"
+						},
+						{
+							"key": "_self",
+							"value": "Mesma janela"
+						},
+						{
+							"key": "_parent",
+							"value": "Janela pai"
+						},
+						{
+							"key": "_top",
+							"value": "Top"
+						}
+					]
+				},
+				"href": {
+					"removable": false,
+					"type": "projectResource",
+					"resourceType": "text/html"
+				}
+			}
+		}
+	]
+}

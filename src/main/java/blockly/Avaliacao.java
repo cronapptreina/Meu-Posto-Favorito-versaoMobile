@@ -35,4 +35,35 @@ public class Avaliacao {
 		}.call();
 	}
 
+	/**
+	 *
+	 * @param nota
+	 * @param comentario
+	 * @param id_abastecimento
+	 * @return Var
+	 */
+	// Avaliacao
+	public static Var insere_avaliacaoExerna(Var nota, Var comentario, Var id_abastecimento) throws Exception {
+		return new Callable<Var>() {
+
+			private Var campos = Var.VAR_NULL;
+
+			public Var call() throws Exception {
+				campos = cronapi.util.Operations.getURLFromOthers(Var.valueOf("POST"),
+						Var.valueOf("application/x-www-form-urlencoded"),
+						Var.valueOf("https://8-61-10650.debug.ide.cronapp.io/webapp/#/home/logged/avaliacao"),
+						cronapi.map.Operations.createObjectMapWith(Var.valueOf("comentario", comentario),
+								Var.valueOf("nota", nota),
+								Var.valueOf("id_abastecimento", cronapi.database.Operations.newEntity(
+										Var.valueOf("app.entity.Abastecimento"), Var.valueOf("id", id_abastecimento)))),
+						Var.VAR_NULL);
+				System.out.println(campos.getObjectAsString());
+				cronapi.database.Operations.execute(Var.valueOf("app.entity.Abastecimento"),
+						Var.valueOf("update Abastecimento set status = :status where id = :id"),
+						Var.valueOf("status", Var.valueOf("true")), Var.valueOf("id", id_abastecimento));
+				return Var.VAR_NULL;
+			}
+		}.call();
+	}
+
 }

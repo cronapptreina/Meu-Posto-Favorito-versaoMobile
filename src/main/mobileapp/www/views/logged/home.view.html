@@ -1,43 +1,12 @@
-<ion-view view-title="CronApp"> 
+<div id="starter" ng-init="cronapi.util.makeCallServerBlocklyAsync('blockly.Graficos:inicio', null, null)" ng-destroy=""><ion-view view-title="CronApp"> 
   <ion-content> 
-    <div class="component-holder ng-binding ng-scope" data-component="crn-div" id="crn-div-929090" style="padding-top: 60px;"> 
+    <div class="component-holder ng-binding ng-scope col-xs-1" data-component="crn-div" id="crn-div-929090" style="padding-top: 60px; width: 428px; height: 33px;"> 
       <div class="list"> 
-        <div class="col text-center"> 
-          <div class="component-holder ng-binding ng-scope" data-component="crn-image" id="crn-image-174578" ng-click="vibrate()"> 
-            <img src="img/logo.png"> 
-          </div> 
-        </div> 
-        <div class="component-holder ng-binding ng-scope" data-component="crn-div-horizontal" id="crn-div-horizontal-270296"> 
-          <div class="row"> 
-            <div class="col active"> 
-              <div class="text-center"> 
-                <div class="component-holder ng-binding ng-scope" data-component="crn-anchor" id="crn-anchor-1006017"> 
-                  <a href="#/app/logged/user" target="_self"> 
-                    <div class="component-holder ng-binding ng-scope"> 
-                      <i class="icon ion-person placeholder-icon" style="font-size: 60px"></i> 
-                    </div> 
-                    <div class="component-holder ng-binding ng-scope" data-component="crn-title" id="crn-title-864330"> 
-                      <p class="text-center"> {{ "Users.view.Users" | translate }}</p> 
-                    </div> </a> 
-                </div> 
-              </div> 
-            </div> 
-            <div class="col"> 
-              <div></div> 
-            </div> 
-            <div class="col"> 
-              <div></div> 
-            </div> 
-            <div class="col"> 
-              <div></div> 
-            </div> 
-            <div class="col"> 
-              <div></div> 
-            </div> 
-          </div>
+        <div class="col text-center col-xs-12"> 
            
         </div> 
+        <ion-item class="item dark component-holder col-xs-1" xattr-theme="dark" data-replace="false" data-component="crn-list-item" id="crn-list-item-402450" style="width: 398px; height: 153px;"><button class="button component-holder col-xs-12 button-positive" type="submit" ng-click="cronapi.util.makeCallServerBlocklyAsync('blockly.Graficos:postos', null, null)" data-component="crn-button" id="crn-button-360492" xattr-theme="button-positive"> <span>Rentabilidade dos Postos</span></button><button class="button component-holder col-xs-12 button-balanced" type="submit" ng-click="cronapi.util.makeCallServerBlocklyAsync('blockly.Graficos:carros', null, null)" data-component="crn-button" id="crn-button-360492" xattr-theme="button-balanced"> <span ng-click="cronapi.util.makeCallServerBlocklyAsync('blockly.Graficos:carros', null, null)">Rentabilidade dos Carros</span></button><button class="button component-holder col-xs-12 button-calm" type="submit" ng-click="cronapi.util.makeCallServerBlocklyAsync('blockly.Graficos:media_notas', null, null)" data-component="crn-button" id="crn-button-360492" xattr-theme="button-calm"> <span>Média das Notas dos Postos</span></button></ion-item><ion-item class="item dark component-holder col-xs-1" xattr-theme="dark" data-replace="false" data-component="crn-list-item" id="crn-list-item-348036" style="width: 429px; height: 341px;"><div data-component="crn-chart" class="component-holder" id="crn-chart-477603"> <canvas id="graph" data-component="crn-chart" class="col-xs-12" style="height: 300px"></canvas></div></ion-item> 
       </div> 
     </div> 
   </ion-content> 
-</ion-view>
+</ion-view></div>

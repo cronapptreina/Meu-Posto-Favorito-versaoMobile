@@ -24,12 +24,13 @@ public class CadastroUsuario {
 			private Var excep = Var.VAR_NULL;
 
 			public Var call() throws Exception {
-				if (Var.valueOf(cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.senha"))
-						.equals(cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.senhaConfere"))))
+				if (Var.valueOf(Var.valueOf(cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.senha")))
+						.equals(Var
+								.valueOf(cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.senhaConfere")))))
 						.getObjectAsBoolean()) {
-					senha = cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.senha"));
-					login = cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.login"));
-					email = cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.email"));
+					senha = Var.valueOf(cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.senha")));
+					login = Var.valueOf(cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.login")));
+					email = Var.valueOf(cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.email")));
 					try {
 						cronapi.database.Operations.insert(Var.valueOf("app.entity.User"),
 								Var.valueOf("password", senha), Var.valueOf("name", email), Var.valueOf("login", login),

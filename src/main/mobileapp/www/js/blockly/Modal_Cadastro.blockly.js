@@ -4,8 +4,6 @@ window.blockly.js.blockly = window.blockly.js.blockly || {};
 window.blockly.js.blockly.ModalCadastro = window.blockly.js.blockly.ModalCadastro
 		|| {};
 
-var item;
-
 /**
  * Descreva esta função...
  */

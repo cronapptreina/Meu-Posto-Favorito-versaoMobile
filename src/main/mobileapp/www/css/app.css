@@ -784,3 +784,4 @@ body {
 .input-validation-error {
     border-bottom: 2px solid red !important;
 }
+.map-canvas { height: 400px; }

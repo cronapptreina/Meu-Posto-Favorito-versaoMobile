@@ -20,7 +20,7 @@ public class Data {
 		return new Callable<Var>() {
 
 			public Var call() throws Exception {
-				return cronapi.dateTime.Operations.getNow();
+				return Var.valueOf(cronapi.dateTime.Operations.getNow());
 			}
 		}.call();
 	}
