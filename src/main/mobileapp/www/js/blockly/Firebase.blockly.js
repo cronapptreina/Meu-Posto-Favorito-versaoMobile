@@ -4,13 +4,40 @@ window.blockly.js.blockly = window.blockly.js.blockly || {};
 window.blockly.js.blockly.Firebase = window.blockly.js.blockly.Firebase || {};
 
 /**
+ * Descreva esta função...
+ */
+window.blockly.js.blockly.Firebase.ao_receber_mensagens = function() {
+
+	var item, bd;
+	bd = this.cronapi.firebase.getDatabase('');
+	this.cronapi.firebase.addOnEvent(bd, '/msg', function(sender_item) {
+		item = sender_item;
+		this.cronapi.screen.changeValueOfField('messages', item);
+	}.bind(this));
+}
+
+/**
+ * Descreva esta função...
+ */
+window.blockly.js.blockly.Firebase.enviar_msg = function() {
+
+	var item, bd;
+	this.cronapi.firebase.pushData(this.cronapi.firebase.getDatabase(''),
+			'/msg', this.cronapi.util.callServerBlockly(
+					'blockly.FirebaseBack:formatar_mensagem',
+					this.cronapi.screen.getValueOfField("vars.message")));
+}
+
+/**
  * Firebase
  */
 window.blockly.js.blockly.Firebase.configurar = function() {
+
+	var item, bd;
 	this.cronapi.firebase.configFirebase(
-			'AIzaSyAveXRcqG6PEP-99hHoHcVsMeSR9Ku5sw8',
-			'meu-posto-favorito-6d534.firebaseapp.com',
-			'https://meu-posto-favorito-6d534.firebaseio.com',
-			'meu-posto-favorito-6d534', 'meu-posto-favorito-6d534.appspot.com',
-			'557900396365', '', '1:557900396365:android:89342e52a8a576e0\n');
+			'AIzaSyBlGjxJjUj5RdDajSX91euglnlfEWN8xrM',
+			'postofavorito-caac8.firebaseapp.com',
+			'https://postofavorito-caac8.firebaseio.com',
+			'postofavorito-caac8', 'postofavorito-caac8.appspot.com',
+			'235363942691', '', '1:235363942691:android:e5abccfbc945f655');
 }
